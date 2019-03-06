@@ -16,7 +16,7 @@ class ModalNewTeam extends Component {
 
     handleSubmit() {
         this.props.addTeam(this.state.teamName);
-        this.setState({teamName: ''});
+        this.setState({ teamName: '' });
     }
 
     handleChange(e) {
@@ -36,7 +36,8 @@ class ModalNewTeam extends Component {
                     <div>
                         <Button onClick={this.handleSubmit} modal="close" className='btn pink lighten-1 waves-effect waves-light' style={{ marginRight: 5 }}><i className="material-icons right">send</i>Submit</Button>
                         <Button modal="close" className='btn pink lighten-1 waves-effect waves-light'><i className="material-icons right">close</i>Cancel</Button>
-                    </div>}
+                    </div>
+                }
             >
                 <Row>
                     <Input name="teamName" s={12} label="Team Name" onChange={this.handleChange} />

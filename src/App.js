@@ -5,6 +5,7 @@ import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
 import ManageTeams from './components/teams/ManageTeams';
 import EditTeam from './components/teams/EditTeam';
+import Dashboard from './components/dashboard/Dashboard';
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
         <div className="App">
           <Navbar />
           <Switch>
+            <Route exact path='/' component={Dashboard} />
             <Route path='/signin' component={SignIn} />
             <Route path='/signup' component={SignUp} />
             <Route path="/teams/:id" component={EditTeam} />
