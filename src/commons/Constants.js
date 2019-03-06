@@ -1,0 +1,1 @@
+export const NO_TEAM = 'NO_TEAM';
