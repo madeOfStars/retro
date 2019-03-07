@@ -8,7 +8,7 @@ class ModalNewTeam extends Component {
 
         this.state = {
             teamName: ''
-        }
+        };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
