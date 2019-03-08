@@ -24,11 +24,15 @@ export class SignIn extends Component {
     handleSubmit(e) {
         e.preventDefault();
         this.props.singIn(this.state);
-        this.props.history.push('/');
     }
 
     render() {
-        const { authError } = this.props;
+        const { authError, auth } = this.props;
+
+        if (auth.uid) {
+            this.props.history.push('/dashboard');
+        }
+
         return (
             <div className="row">
                 <div className="col s4 offset-s4">
@@ -49,7 +53,8 @@ export class SignIn extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        authError: state.auth.authError
+        authError: state.auth.authError,
+        auth: state.firebase.auth
     }
 }
 

@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ModalCreateSprint from '../sprints/ModalCreateSprint';
+import { Redirect } from 'react-router-dom';
+import ModalCreateSprint from '../retros/ModalCreateRetroSession';
 
 class Dashboard extends Component {
     render() {
+        const { auth } = this.props;
+
+        if (!auth.uid) {
+            return <Redirect to="/signin" />;
+        }
+
         return (
             <div>
                 <ModalCreateSprint />
