@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Modal, Row, Input } from 'react-materialize';
 
+import moment from 'moment';
+
 class ModalCreateRetroSession extends Component {
 
     constructor(props) {
@@ -25,8 +27,9 @@ class ModalCreateRetroSession extends Component {
 
     handleSubmit() {
         console.log(this.state);
-        this.formatDate(this.state.startingDate);
-        // this.cleanForm();
+        const startingDate = this.formatDate(this.state.startingDate);
+        const endingDate = this.formatDate(this.state.endingDate);
+        this.cleanForm();
     }
 
     cleanForm() {
@@ -38,8 +41,7 @@ class ModalCreateRetroSession extends Component {
     }
 
     formatDate(inputDate) {
-        console.log(inputDate.toLocaleDateString("de-DE"));
-        return null;
+        return moment(inputDate, "DD MMMM, YYYY").format("DD.MM.YYYY");
     }
 
     render() {

@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
+import { firebaseConnect } from 'react-redux-firebase';
 import ModalCreateSprint from '../retros/ModalCreateRetroSession';
 
 class Dashboard extends Component {
     render() {
-        const { auth } = this.props;
+        const { auth, users } = this.props;
 
         if (!auth.uid) {
             return <Redirect to="/signin" />;
         }
+
+        const loggedUser = users!==undefined ? users[auth.uid] : null;
+        console.log(loggedUser);
 
         return (
             <div>
@@ -21,8 +26,14 @@ class Dashboard extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        users: state.firebase.data.users
     }
 }
 
-export default connect(mapStateToProps, null)(Dashboard);
+export default compose(
+    connect(mapStateToProps, null),
+    firebaseConnect([
+        {path: 'users'}
+    ])
+)(Dashboard);
