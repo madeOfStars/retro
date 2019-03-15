@@ -5,20 +5,21 @@ import { Redirect } from 'react-router-dom';
 import { firebaseConnect } from 'react-redux-firebase';
 import ModalCreateSprint from '../retros/ModalCreateRetroSession';
 
+import { createNewRetroSession } from '../../store/actions/retros/retroActions';
+
 class Dashboard extends Component {
     render() {
-        const { auth, users } = this.props;
+        const { auth, users, teams } = this.props;
 
         if (!auth.uid) {
             return <Redirect to="/signin" />;
         }
 
-        const loggedUser = users!==undefined ? users[auth.uid] : null;
-        console.log(loggedUser);
+        const loggedUser = users !== undefined ? users[auth.uid] : null;
 
         return (
             <div>
-                <ModalCreateSprint />
+                <ModalCreateSprint createNewRetroSession={this.props.createNewRetroSession} loggedUser={loggedUser} />
             </div>
         );
     }
@@ -31,9 +32,15 @@ const mapStateToProps = (state) => {
     }
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createNewRetroSession: (retroSession) => dispatch(createNewRetroSession(retroSession))
+    }
+}
+
 export default compose(
-    connect(mapStateToProps, null),
+    connect(mapStateToProps, mapDispatchToProps),
     firebaseConnect([
-        {path: 'users'}
+        { path: 'users' }
     ])
 )(Dashboard);

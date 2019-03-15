@@ -3,13 +3,15 @@ import { Button, Modal, Row, Input } from 'react-materialize';
 
 import moment from 'moment';
 
+import { RETRO_STATUS } from '../../commons/Constants';
+
 class ModalCreateRetroSession extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            sprintName: '',
+            sessionName: '',
             startingDate: '',
             endingDate: ''
         };
@@ -26,15 +28,21 @@ class ModalCreateRetroSession extends Component {
     }
 
     handleSubmit() {
-        console.log(this.state);
         const startingDate = this.formatDate(this.state.startingDate);
         const endingDate = this.formatDate(this.state.endingDate);
+        this.props.createNewRetroSession({
+            name: this.state.sessionName,
+            startingDate,
+            endingDate,
+            team: this.props.loggedUser.team,
+            status: RETRO_STATUS.OPEN
+        });
         this.cleanForm();
     }
 
     cleanForm() {
         this.setState({
-            sprintName: '',
+            sessionName: '',
             startingDate: '',
             endingDate: ''
         });
@@ -58,7 +66,7 @@ class ModalCreateRetroSession extends Component {
                 }
             >
                 <Row>
-                    <Input onChange={this.handleChange} name="sprintName" s={12} placeholder="Sprint name" value={this.state.sprintName} />
+                    <Input onChange={this.handleChange} name="sessionName" s={12} placeholder="Session name" value={this.state.sessionName} />
                 </Row>
                 <Row>
                     <Input onChange={this.handleChange} name="startingDate" s={6} type="date" placeholder="Starting date" value={this.state.startingDate} />

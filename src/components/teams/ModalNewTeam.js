@@ -33,7 +33,7 @@ class ModalNewTeam extends Component {
     render() {
         return (
             <Modal
-                header='Add new Team' fixedFooter
+                header='Add new team' fixedFooter
                 trigger={
                     <Button floating large className='pink lighten-1' waves='light' icon='add' style={{ position: 'fixed', bottom: '24px', right: '24px' }} />
                 }
