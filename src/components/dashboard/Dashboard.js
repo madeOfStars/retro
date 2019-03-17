@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
 import { firebaseConnect } from 'react-redux-firebase';
-import ModalCreateSprint from '../retros/ModalCreateRetroSession';
+import ModalCreateSprint from '../retro/ModalCreateRetroSession';
 
-import { createNewRetroSession } from '../../store/actions/retros/retroActions';
+import { createNewRetroSession } from '../../store/actions/retro/retroActions';
 
 class Dashboard extends Component {
     render() {
-        const { auth, users, teams } = this.props;
+        const { auth, users } = this.props;
 
         if (!auth.uid) {
             return <Redirect to="/signin" />;

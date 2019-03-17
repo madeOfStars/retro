@@ -1,4 +1,4 @@
-import actionTypes from '../types';
+import actionTypes from '../../types';
 import { NO_TEAM } from '../../../commons/Constants';
 
 export const addTeam = (newTeam) => {
