@@ -44,7 +44,6 @@ export const signUp = (newUser) => {
                     firebase.ref(`teams/${newUser.team}/users`).set(users);
                 });                
             }).catch((err) => {
-                console.log('ERROR');
                 dispatch({ type: actionTypes.SIGNUP.ERROR, err });
             });
         }).then(() => {
