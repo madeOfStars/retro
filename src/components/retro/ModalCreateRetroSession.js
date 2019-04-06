@@ -35,7 +35,7 @@ class ModalCreateRetroSession extends Component {
             startingDate,
             endingDate,
             team: this.props.loggedUser.team,
-            status: RETRO_STATUS.OPEN
+            status: RETRO_STATUS.OPEN.status
         });
         this.cleanForm();
     }

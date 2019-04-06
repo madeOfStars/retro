@@ -11,7 +11,7 @@ class ActiveRetros extends Component {
                     <Col key={retro.key} m={3} s={6}>
                         <Card key={retro.key} title={retro.value.name}
                             actions={[
-                                <div key='actions'>
+                                <div key='actions' className="right-align">
                                     <Button key='join' className='btn pink lighten-1 waves-effect waves-light'>
                                         Join Session
                                     </Button>
@@ -28,9 +28,9 @@ class ActiveRetros extends Component {
             <Row>
                 {
                     (activeRetros && activeRetros.length > 0) ?
-                        <h5>Active retros</h5>
+                        <h5>{this.props.type} retros</h5>
                         :
-                        <h5>No active retros</h5>
+                        <h5>No {this.props.type} retros</h5>
                 }
                 {activeRetros}
             </Row>

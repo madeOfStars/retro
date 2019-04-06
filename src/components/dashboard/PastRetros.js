@@ -10,7 +10,7 @@ class PastRetros extends Component {
                     <Col key={retro.key} m={3} s={6}>
                         <Card key={retro.key} title={retro.value.name}
                             actions={[
-                                <div key='actions'>
+                                <div key='actions' className="right-align">
                                     <Button key='show' className='btn pink lighten-1 waves-effect waves-light' style={{ marginRight: 5 }}>
                                         Show
                                     </Button>
@@ -40,4 +40,4 @@ class PastRetros extends Component {
     }
 }
 
-export default PastRetros
+export default PastRetros;

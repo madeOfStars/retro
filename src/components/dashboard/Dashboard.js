@@ -25,8 +25,9 @@ class Dashboard extends Component {
 
         return (
             <div>
-                <ActiveRetros activeRetros={this.fetchRetrosByStatusAndUserTeam(retros, RETRO_STATUS.ONGOING, loggedUser)} />
-                <PastRetros pastRetros={this.fetchRetrosByStatusAndUserTeam(retros, RETRO_STATUS.CLOSED, loggedUser)} />
+                <ActiveRetros activeRetros={this.fetchRetrosByStatusAndUserTeam(retros, RETRO_STATUS.OPEN.status, loggedUser)} type={RETRO_STATUS.OPEN.label}/>
+                <ActiveRetros activeRetros={this.fetchRetrosByStatusAndUserTeam(retros, RETRO_STATUS.ONGOING.status, loggedUser)} type={RETRO_STATUS.ONGOING.label}/>
+                <PastRetros pastRetros={this.fetchRetrosByStatusAndUserTeam(retros, RETRO_STATUS.CLOSED.status, loggedUser)} />
                 <ModalCreateSprint createNewRetroSession={this.props.createNewRetroSession} loggedUser={loggedUser} />
             </div>
         );
