@@ -12,6 +12,13 @@ import { createNewRetroSession } from '../../store/actions/retro/retroActions';
 
 class Dashboard extends Component {
 
+    canCreateNewSession(openRetros, ongoingRetros) {
+        if ((openRetros && openRetros.length > 0) || (ongoingRetros && ongoingRetros.length > 0)) {
+            return false;
+        }
+        return true;
+    }
+
     render() {
         const { auth, users, retros } = this.props;
 
@@ -19,16 +26,19 @@ class Dashboard extends Component {
             return <Redirect to="/signin" />;
         }
 
-        console.log(this.props);
-
         const loggedUser = users !== undefined ? users[auth.uid] : null;
+
+        const openRetros = this.fetchRetrosByStatusAndUserTeam(retros, RETRO_STATUS.OPEN.status, loggedUser);
+        const ongoingRetros = this.fetchRetrosByStatusAndUserTeam(retros, RETRO_STATUS.ONGOING.status, loggedUser);
+        const allowCreationOfNewSession = this.canCreateNewSession(openRetros, ongoingRetros);
+        console.log(allowCreationOfNewSession);
 
         return (
             <div>
-                <ActiveRetros activeRetros={this.fetchRetrosByStatusAndUserTeam(retros, RETRO_STATUS.OPEN.status, loggedUser)} type={RETRO_STATUS.OPEN.label}/>
-                <ActiveRetros activeRetros={this.fetchRetrosByStatusAndUserTeam(retros, RETRO_STATUS.ONGOING.status, loggedUser)} type={RETRO_STATUS.ONGOING.label}/>
+                <ActiveRetros activeRetros={openRetros} type={RETRO_STATUS.OPEN.label} />
+                <ActiveRetros activeRetros={ongoingRetros} type={RETRO_STATUS.ONGOING.label} />
                 <PastRetros pastRetros={this.fetchRetrosByStatusAndUserTeam(retros, RETRO_STATUS.CLOSED.status, loggedUser)} />
-                <ModalCreateSprint createNewRetroSession={this.props.createNewRetroSession} loggedUser={loggedUser} />
+                <ModalCreateSprint createNewRetroSession={this.props.createNewRetroSession} loggedUser={loggedUser} allowCreationOfNewSession={allowCreationOfNewSession} />
             </div>
         );
     }

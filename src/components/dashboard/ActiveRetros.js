@@ -1,7 +1,36 @@
 import React, { Component } from 'react';
 import { Card, Col, Row, Button } from 'react-materialize';
 
+import { RETRO_STATUS } from '../../commons/Constants'
+
 class ActiveRetros extends Component {
+
+    constructor(props) {
+        super(props);
+        this.sessionType = this.sessionType.bind(this);
+    }
+
+    sessionType() {
+        const type = this.props.type;
+
+        switch (type) {
+            case RETRO_STATUS.OPEN.label:
+                return this.createButtonBySession("Start Session");
+
+            case RETRO_STATUS.ONGOING.label:
+                return this.createButtonBySession("Join Session");
+        }
+
+        return null;
+    }
+
+    createButtonBySession(message) {
+        return (
+            <Button key='join' className='btn pink lighten-1 waves-effect waves-light'>
+                {message}
+            </Button>
+        );
+    }
 
     render() {
         let activeRetros = null;
@@ -12,9 +41,7 @@ class ActiveRetros extends Component {
                         <Card key={retro.key} title={retro.value.name}
                             actions={[
                                 <div key='actions' className="right-align">
-                                    <Button key='join' className='btn pink lighten-1 waves-effect waves-light'>
-                                        Join Session
-                                    </Button>
+                                    {this.sessionType()}
                                 </div>
                             ]}
                         >
