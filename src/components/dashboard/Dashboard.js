@@ -31,7 +31,6 @@ class Dashboard extends Component {
         const openRetros = this.fetchRetrosByStatusAndUserTeam(retros, RETRO_STATUS.OPEN.status, loggedUser);
         const ongoingRetros = this.fetchRetrosByStatusAndUserTeam(retros, RETRO_STATUS.ONGOING.status, loggedUser);
         const allowCreationOfNewSession = this.canCreateNewSession(openRetros, ongoingRetros);
-        console.log(allowCreationOfNewSession);
 
         return (
             <div>

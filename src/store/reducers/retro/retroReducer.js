@@ -16,6 +16,16 @@ const retroReducer = (state = initialState, action) => {
                 ...state,
                 retroError: action.err.message
             }
+        case actionTypes.DELETE_RETRO.SUCCESS:
+            return {
+                ...state,
+                retroError: null
+            }
+        case actionTypes.DELETE_RETRO.ERROR:
+            return {
+                ...state,
+                retroError: action.err.message
+            }
         default:
             return state;
     }

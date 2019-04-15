@@ -1,7 +1,30 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Card, Col, Row, Button } from 'react-materialize';
 
+import DialogDeleteRetro from '../retro/DialogDeleteRetro';
+import { deleteRetro } from '../../store/actions/retro/retroActions';
+
 class PastRetros extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.showRetro = this.showRetro.bind(this);
+    }
+
+    showRetro(e) {
+        console.log(e.target.id);
+    }
+
+    deleteRetro(retro) {
+        this.props.deleteRetro(retro.key);
+    }
+
+    getDocumentById(retro) {
+        return document.getElementById('delete' + retro.key);
+    }
+
     render() {
         let pastRetros = null;
         if (this.props.pastRetros) {
@@ -10,13 +33,18 @@ class PastRetros extends Component {
                     <Col key={retro.key} m={3} s={6}>
                         <Card key={retro.key} title={retro.value.name}
                             actions={[
-                                <div key='actions' className="right-align">
-                                    <Button key='show' className='btn pink lighten-1 waves-effect waves-light' style={{ marginRight: 5 }}>
-                                        Show
-                                    </Button>
-                                    <Button key='delete' className='btn pink lighten-1 waves-effect waves-light'>
-                                        Delete
-                                    </Button>
+                                <div key={retro.key} className="row" style={{ marginBottom: 0 }}>
+                                    <Col s={6}>
+                                        <Button key='show'
+                                            id={retro.key}
+                                            onClick={this.showRetro}
+                                            className='btn pink lighten-1 waves-effect waves-light'>
+                                            Show
+                                        </Button>
+                                    </Col>
+                                    <Col s={6}>
+                                        <DialogDeleteRetro retro={retro} deleteRetro={(retro) => this.deleteRetro(retro)} />
+                                    </Col>
                                 </div>
                             ]}
                         >
@@ -30,9 +58,9 @@ class PastRetros extends Component {
             <Row>
                 {
                     (pastRetros && pastRetros.length > 0) ?
-                    <h5>Past retros</h5>
-                    :
-                    <h5>No past retro</h5>
+                        <h5>Past retros</h5>
+                        :
+                        <h5>No past retro</h5>
                 }
                 {pastRetros}
             </Row>
@@ -40,4 +68,10 @@ class PastRetros extends Component {
     }
 }
 
-export default PastRetros;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteRetro: (retroId) => dispatch(deleteRetro(retroId))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(PastRetros);

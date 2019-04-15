@@ -19,9 +19,10 @@ class ActiveRetros extends Component {
 
             case RETRO_STATUS.ONGOING.label:
                 return this.createButtonBySession("Join Session");
-        }
 
-        return null;
+            default:
+                return null;
+        }
     }
 
     createButtonBySession(message) {
