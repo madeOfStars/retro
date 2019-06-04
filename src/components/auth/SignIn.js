@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Input, Button } from 'react-materialize';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { singIn } from '../../store/actions/auth/authActions';
 
@@ -28,9 +29,9 @@ export class SignIn extends Component {
 
     render() {
         const { authError, auth } = this.props;
-
+        
         if (auth.uid) {
-            this.props.history.push('/dashboard');
+            return <Redirect to="/dashboard" />;
         }
 
         return (

@@ -7,7 +7,6 @@ import ModalCreateSprint from '../retro/ModalCreateRetroSession';
 import ActiveRetros from './ActiveRetros';
 import PastRetros from './PastRetros';
 import { RETRO_STATUS } from '../../commons/Constants';
-
 import { createNewRetroSession } from '../../store/actions/retro/retroActions';
 
 class Dashboard extends Component {

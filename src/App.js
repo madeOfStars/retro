@@ -6,6 +6,7 @@ import SignUp from './components/auth/SignUp';
 import ManageTeams from './components/teams/ManageTeams';
 import EditTeam from './components/teams/EditTeam';
 import Dashboard from './components/dashboard/Dashboard';
+import RetroSession from './components/retro/session/RetroSession';
 
 class App extends Component {
   render() {
@@ -14,12 +15,13 @@ class App extends Component {
         <div className="App">
           <Navbar />
           <Switch>
-            <Route exact path='/' component={Dashboard}/>
+            <Route exact path='/' component={Dashboard} />
             <Route path='/signin' component={SignIn} />
             <Route path='/signup' component={SignUp} />
             <Route path='/dashboard' component={Dashboard} />
             <Route path="/teams/:id" component={EditTeam} />
             <Route path='/teams' component={ManageTeams} />
+            <Route path='/retro' component={RetroSession} />
           </Switch>
         </div>
       </BrowserRouter>

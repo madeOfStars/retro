@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Col, Row, Button } from 'react-materialize';
+import { withRouter } from 'react-router-dom';
 
 import { RETRO_STATUS } from '../../commons/Constants'
 
@@ -7,30 +8,35 @@ class ActiveRetros extends Component {
 
     constructor(props) {
         super(props);
+
         this.sessionType = this.sessionType.bind(this);
     }
 
-    sessionType() {
+    sessionType(retro) {
         const type = this.props.type;
 
         switch (type) {
             case RETRO_STATUS.OPEN.label:
-                return this.createButtonBySession("Start Session");
+                return this.createButtonBySession("Start Session", retro);
 
             case RETRO_STATUS.ONGOING.label:
-                return this.createButtonBySession("Join Session");
+                return this.createButtonBySession("Join Session", retro);
 
             default:
                 return null;
         }
     }
 
-    createButtonBySession(message) {
+    createButtonBySession(message, retro) {
         return (
-            <Button key='join' className='btn pink lighten-1 waves-effect waves-light'>
+            <Button key='join' onClick={() => this.goToRetroSession(retro)} className='btn pink lighten-1 waves-effect waves-light'>
                 {message}
             </Button>
         );
+    }
+
+    goToRetroSession(retro) {
+        this.props.history.push(`/retro/${retro.key}`);
     }
 
     render() {
@@ -42,7 +48,7 @@ class ActiveRetros extends Component {
                         <Card key={retro.key} title={retro.value.name}
                             actions={[
                                 <div key='actions' className="right-align">
-                                    {this.sessionType()}
+                                    {this.sessionType(retro)}
                                 </div>
                             ]}
                         >
@@ -66,4 +72,4 @@ class ActiveRetros extends Component {
     }
 }
 
-export default ActiveRetros;
+export default withRouter(ActiveRetros);

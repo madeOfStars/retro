@@ -9,7 +9,7 @@ class PastRetros extends Component {
 
     constructor(props) {
         super(props);
-
+        
         this.showRetro = this.showRetro.bind(this);
     }
 

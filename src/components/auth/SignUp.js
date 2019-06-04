@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Input, Button } from 'react-materialize';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { firebaseConnect } from 'react-redux-firebase';
 import { signUp } from '../../store/actions/auth/authActions';
 import { NO_TEAM } from '../../commons/Constants';
@@ -30,11 +31,10 @@ class SignUp extends Component {
     handleSubmit(e) {
         e.preventDefault();
         this.props.signUp(this.state);
-        this.props.history.push('/');
     }
 
     render() {
-        const { authError, teams } = this.props;
+        const { authError, teams, auth } = this.props;
         let teamOptions = null;
 
         if (teams) {
@@ -50,6 +50,10 @@ class SignUp extends Component {
             teamOptions = cleanedTeams.map((team) => {
                 return <option key={team.key} value={team.key}>{team.value.name}</option>
             });
+        }
+
+        if (auth.uid) {
+            return <Redirect to="/dashboard" />;
         }
 
         return (
@@ -77,7 +81,8 @@ class SignUp extends Component {
 const mapStateToProps = (state) => {
     return {
         authError: state.auth.authError,
-        teams: state.firebase.ordered.teams
+        teams: state.firebase.ordered.teams,
+        auth: state.firebase.auth
     }
 }
 
