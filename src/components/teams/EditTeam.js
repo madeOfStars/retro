@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { Redirect } from 'react-router-dom';
 import { firebaseConnect } from 'react-redux-firebase';
 
 import { Collection, CollectionItem } from 'react-materialize';
 
 import { addUserToTeam, removeUserFromTeam } from '../../store/actions/team/teamActions';
 import { NO_TEAM } from '../../commons/Constants';
+import withAuth from '../commons/hoc/withAuth';
 
 class EditTeam extends Component {
 
@@ -56,10 +56,6 @@ class EditTeam extends Component {
 
         const header = (team && team.name) ? team.name : "";
 
-        if (!auth.uid) {
-            return <Redirect to="/signin" />;
-        }
-
         return (
             <div className="row">
                 <div className="col s8 offset-s2">
@@ -86,7 +82,6 @@ const mapStateToProps = (state, ownProps) => {
     const team = teams ? teams[id] : null;
 
     return {
-        auth: state.firebase.auth,
         team,
         users: state.firebase.ordered.users,
         teams
@@ -100,10 +95,10 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default compose(
+export default withAuth(compose(
     connect(mapStateToProps, mapDispatchToProps),
     firebaseConnect([
         { path: 'teams' },
         { path: 'users' }
     ])
-)(EditTeam);
+)(EditTeam));

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase';
-import { Redirect } from 'react-router-dom';
 import { Collection } from 'react-materialize';
 
 import { addTeam, deleteTeam } from '../../store/actions/team/teamActions';
@@ -10,6 +9,7 @@ import { NO_TEAM } from '../../commons/Constants';
 
 import ModalNewTeam from './ModalNewTeam';
 import TeamCollectionItemWrapper from './TeamCollectionItemWrapper';
+import withAuth from '../commons/hoc/withAuth';
 
 class ManageTeams extends Component {
 
@@ -25,12 +25,8 @@ class ManageTeams extends Component {
     }
 
     render() {
-        const { teams, auth } = this.props;
+        const { teams } = this.props;
         let allTeams = null;
-
-        if (!auth.uid) {
-            return <Redirect to="/signin" />;
-        }
 
         if (teams) {
             const cleanedTeams = teams.filter((team) => {
@@ -60,7 +56,6 @@ class ManageTeams extends Component {
 const mapStateToProps = (state) => {
     return {
         teams: state.firebase.ordered.teams,
-        auth: state.firebase.auth
     }
 }
 
@@ -71,7 +66,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default compose(
+export default withAuth(compose(
     connect(mapStateToProps, mapDispatchToProps),
     firebaseConnect([{ path: 'teams' }])
-)(ManageTeams);
+)(ManageTeams));

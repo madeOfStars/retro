@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { Redirect } from 'react-router-dom';
 import { firebaseConnect } from 'react-redux-firebase';
 import ModalCreateSprint from '../retro/ModalCreateRetroSession';
 import ActiveRetros from './ActiveRetros';
 import PastRetros from './PastRetros';
 import { RETRO_STATUS } from '../../commons/Constants';
 import { createNewRetroSession } from '../../store/actions/retro/retroActions';
+import withAuth from '../commons/hoc/withAuth';
 
 class Dashboard extends Component {
 
@@ -20,10 +20,6 @@ class Dashboard extends Component {
 
     render() {
         const { auth, users, retros } = this.props;
-
-        if (!auth.uid) {
-            return <Redirect to="/signin" />;
-        }
 
         const loggedUser = users !== undefined ? users[auth.uid] : null;
 
@@ -53,7 +49,6 @@ class Dashboard extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        auth: state.firebase.auth,
         users: state.firebase.data.users,
         retros: state.firebase.ordered.retros
     }
@@ -65,10 +60,10 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default compose(
+export default withAuth(compose(
     connect(mapStateToProps, mapDispatchToProps),
     firebaseConnect([
         { path: 'users' },
         { path: 'retros' }
     ])
-)(Dashboard);
+)(Dashboard));
