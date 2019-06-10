@@ -26,7 +26,7 @@ class EditTeam extends Component {
     }
 
     render() {
-        const { auth, team } = this.props;
+        const { team } = this.props;
         let activeUsers = null;
         let inActiveUsers = null;
 
