@@ -3,13 +3,22 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase';
 
-import { Collection, CollectionItem } from 'react-materialize';
+import { CollectionItem } from 'react-materialize';
 
 import { addUserToTeam, removeUserFromTeam } from '../../store/actions/team/teamActions';
 import { NO_TEAM } from '../../commons/Constants';
 import withAuth from '../commons/hoc/withAuth';
+import TeamsPanel from './TeamsPanel';
+import UserElementComponent from './UserElementComponent';
 
 class EditTeam extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.addUserToTeam = this.addUserToTeam.bind(this);
+        this.removeUserFromTeam = this.removeUserFromTeam.bind(this);
+    }
 
     addUserToTeam(e, user) {
         e.preventDefault();
@@ -32,12 +41,12 @@ class EditTeam extends Component {
 
         if (team && team.users) {
             activeUsers = team.users.map(user => {
-                return <CollectionItem key={user.key}>
-                    <span className="title">{user.user}</span>
-                    <a href="" onClick={(e) => this.removeUserFromTeam(e, user)} className="secondary-content">
-                        <i id={user.key} className="material-icons pink-text lighten-1">clear</i>
-                    </a>
-                </CollectionItem>
+                return <UserElementComponent
+                    user={user}
+                    title={user.user}
+                    action={this.removeUserFromTeam}
+                    button={"clear"}
+                />
             });
         }
 
@@ -45,12 +54,12 @@ class EditTeam extends Component {
             inActiveUsers = this.props.users
                 .filter(user => user.value.team !== this.props.match.params.id)
                 .map(user => {
-                    return <CollectionItem key={user.key}>
-                        <span className="title">{user.value.userName}</span>
-                        <a href="" onClick={(e) => this.addUserToTeam(e, user)} className="secondary-content">
-                            <i id={user.key} className="material-icons pink-text lighten-1">add</i>
-                        </a>
-                    </CollectionItem>
+                    return <UserElementComponent
+                        user={user}
+                        title={user.value.userName}
+                        action={this.addUserToTeam}
+                        button={"add"}
+                    />
                 });
         }
 
@@ -59,16 +68,8 @@ class EditTeam extends Component {
         return (
             <div className="row">
                 <div className="col s8 offset-s2">
-                    <div className="col s6">
-                        <Collection header={header}>
-                            {activeUsers}
-                        </Collection>
-                    </div>
-                    <div className="col s6">
-                        <Collection header={"Not in " + header}>
-                            {inActiveUsers}
-                        </Collection>
-                    </div>
+                    <TeamsPanel header={header} users={activeUsers} />
+                    <TeamsPanel header={"Not in " + header} users={inActiveUsers} />
                 </div>
             </div>
         );
