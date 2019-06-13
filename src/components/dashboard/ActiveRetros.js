@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Card, Col, Row, Button } from 'react-materialize';
+import { Button } from 'react-materialize';
 import { withRouter } from 'react-router-dom';
 
 import { RETRO_STATUS } from '../../commons/Constants'
+import CardComponent from './CardComponent';
 
 class ActiveRetros extends Component {
 
@@ -10,6 +11,7 @@ class ActiveRetros extends Component {
         super(props);
 
         this.sessionType = this.sessionType.bind(this);
+        this.createAction = this.createAction.bind(this);
     }
 
     sessionType(retro) {
@@ -39,36 +41,20 @@ class ActiveRetros extends Component {
         this.props.history.push(`/retro/${retro.key}`);
     }
 
-    render() {
-        let activeRetros = null;
-        if (this.props.activeRetros)
-            activeRetros = this.props.activeRetros.map((retro) => {
-                return (
-                    <Col key={retro.key} m={3} s={6}>
-                        <Card key={retro.key} title={retro.value.name}
-                            actions={[
-                                <div key='actions' className="right-align">
-                                    {this.sessionType(retro)}
-                                </div>
-                            ]}
-                        >
-                            {retro.value.startingDate + " - " + retro.value.endingDate}
-                        </Card>
-                    </Col>
-                );
-            });
-
+    createAction(retro) {
         return (
-            <Row>
-                {
-                    (activeRetros && activeRetros.length > 0) ?
-                        <h5>{this.props.type} retros</h5>
-                        :
-                        <h5>No {this.props.type} retros</h5>
-                }
-                {activeRetros}
-            </Row>
+            <div key='actions' className="right-align">
+                {this.sessionType(retro)}
+            </div>
         );
+    }
+
+    render() {
+        return <CardComponent
+            retros={this.props.activeRetros}
+            action={this.createAction}
+            type={this.props.type}
+        />
     }
 }
 

@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase';
 
-import { CollectionItem } from 'react-materialize';
-
 import { addUserToTeam, removeUserFromTeam } from '../../store/actions/team/teamActions';
 import { NO_TEAM } from '../../commons/Constants';
 import withAuth from '../commons/hoc/withAuth';

@@ -31,7 +31,7 @@ class Dashboard extends Component {
             <div>
                 <ActiveRetros activeRetros={openRetros} type={RETRO_STATUS.OPEN.label} />
                 <ActiveRetros activeRetros={ongoingRetros} type={RETRO_STATUS.ONGOING.label} />
-                <PastRetros pastRetros={this.fetchRetrosByStatusAndUserTeam(retros, RETRO_STATUS.CLOSED.status, loggedUser)} />
+                <PastRetros pastRetros={this.fetchRetrosByStatusAndUserTeam(retros, RETRO_STATUS.CLOSED.status, loggedUser)} type={RETRO_STATUS.CLOSED.label} />
                 <ModalCreateSprint createNewRetroSession={this.props.createNewRetroSession} loggedUser={loggedUser} allowCreationOfNewSession={allowCreationOfNewSession} />
             </div>
         );
