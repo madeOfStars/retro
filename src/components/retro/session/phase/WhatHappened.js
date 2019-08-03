@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import Note from '../Note';
+import Container from '../Container'
 
 class WhatHappened extends Component {
     render() {
-        const { color } = this.props;
+        const { phase } = this.props;
         return (
-            <div>
-                <Note color={color} />
-            </div>
+            <Container phase={phase} header={"Add new note"} />
         );
     }
 }
