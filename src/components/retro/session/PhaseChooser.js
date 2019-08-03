@@ -12,11 +12,11 @@ class PhaseChooser extends Component {
         const { phase } = this.props.phase;
 
         if (phase.identifier === RETRO_PHASE.WHAT_HAPPENDED.identifier) {
-            return <WhatHappened />
+            return <WhatHappened color={phase.color} />
         } else if (phase.identifier === RETRO_PHASE.POSITIVES_AND_NEGATIVES.identifier) {
-            return <PositivesNegatives />
+            return <PositivesNegatives color={phase.color} />
         } else if (phase.identifier === RETRO_PHASE.CLUSTERING.identifier) {
-            return <Clustering />
+            return <Clustering color={phase.color} />
         } else {
             return <Error />
         }

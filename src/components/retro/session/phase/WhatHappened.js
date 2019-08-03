@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import Note from '../Note';
 
 class WhatHappened extends Component {
     render() {
+        const { color } = this.props;
         return (
             <div>
-                WhatHappened
+                <Note color={color} />
             </div>
         );
     }

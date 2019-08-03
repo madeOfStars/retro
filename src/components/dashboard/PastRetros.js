@@ -29,7 +29,7 @@ class PastRetros extends Component {
 
     createAction(retro) {
         return (
-            <div key={retro.key} className="row" style={{ marginBottom: 0 }}>
+            <div key={retro.key} className="row" style={{ marginBottom: 0, textAlign: "center" }}>
                 <Col s={6}>
                     <Button key='show'
                         id={retro.key}
