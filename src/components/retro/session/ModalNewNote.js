@@ -3,6 +3,32 @@ import { Button, Modal, Row, Input } from 'react-materialize';
 import { compose } from '../../commons/ClassComposer';
 
 class ModalNewNote extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            noteText: ''
+        }
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit() {
+        this.props.addNewPersonalNote(this.state.noteText);
+    }
+
+    handleChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
+    cleanForm() {
+        this.setState({ noteText: '' });
+    }
+
     render() {
         const { phase, header } = this.props;
         return (

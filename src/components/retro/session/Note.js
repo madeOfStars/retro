@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { compose } from '../../commons/ClassComposer';
-import noteStyle from './Note.module.css';
+import noteStyle from './css/Note.module.css';
 
 class Note extends Component {
 
