@@ -4,11 +4,11 @@ import personalNoteStyle from './css/PersonalNote.module.css';
 
 class PersonalNote extends Component {
     render() {
-        const { color } = this.props;
+        const { color, text } = this.props;
         return (
             <div className={compose(personalNoteStyle.personalNote, color)}>
                 <p>
-                    Hello
+                    {text}
                 </p>
             </div>
         );

@@ -4,12 +4,16 @@ import PersonalNote from './PersonalNote';
 
 class Container extends Component {
     render() {
-        const { phase, header, addNewPersonalNote } = this.props;
+        const { phase, header, addNewPersonalNote, personalNotes } = this.props;
+
+        const pNotes = personalNotes.map(personalNote => {
+            return <PersonalNote color={phase.color} text={personalNote} />;
+        });
+
         return (
             <div className="row">
                 <div className="col s2 offset-s10">
-                    <PersonalNote color={phase.color} />
-                    <PersonalNote color={phase.color} />
+                    {pNotes}
                     <ModalNewNote
                         phase={phase}
                         header={header}

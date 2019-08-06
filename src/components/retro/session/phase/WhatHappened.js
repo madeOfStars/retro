@@ -26,6 +26,7 @@ class WhatHappened extends Component {
                 phase={phase}
                 header={"Add new note"}
                 addNewPersonalNote={this.addNewPersonalNote}
+                personalNotes={this.state.personalNotes}
             />
         );
     }
