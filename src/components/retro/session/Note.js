@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { compose } from '../../commons/ClassComposer';
+
 import noteStyle from './css/Note.module.css';
 
 class Note extends Component {
@@ -21,10 +22,11 @@ class Note extends Component {
     }
 
     render() {
-        const { color } = this.props;
+        const { color, note } = this.props;
+        console.log(this.props);
         return (
             <div className={compose(noteStyle.note, color)} style={this.generateStyle()} >
-                <p>Hi</p>
+                <p>{note.text}</p>
             </div>
         );
     }

@@ -1,18 +1,39 @@
 import React, { Component } from 'react';
 import ModalNewNote from './ModalNewNote';
 import PersonalNote from './PersonalNote';
+import Target from './Target';
 
 class Container extends Component {
-    render() {
-        const { phase, header, addNewPersonalNote, personalNotes } = this.props;
 
-        const pNotes = personalNotes.map(personalNote => {
-            return <PersonalNote color={phase.color} text={personalNote} />;
+    constructor(props) {
+        super(props)
+
+        this.deletePersonalNote = this.deletePersonalNote.bind(this);
+    }
+
+    deletePersonalNote = (indexableNote) => {
+        this.props.addNewNote(indexableNote);
+    }
+
+    render() {
+        const { phase, header, addNewPersonalNote, personalNotes, notes } = this.props;
+
+        const pNotes = personalNotes.map((personalNote, i) => {
+            const indexableNote = {
+                id: i,
+                text: personalNote
+            };
+            return <PersonalNote
+                key={i} color={phase.color}
+                personalNote={indexableNote}
+                handleDrop={this.deletePersonalNote}
+            />;
         });
 
         return (
             <div className="row">
-                <div className="col s2 offset-s10">
+                <Target notes={notes} color={phase.color} />
+                <div className="col s2">
                     {pNotes}
                     <ModalNewNote
                         phase={phase}

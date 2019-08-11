@@ -8,23 +8,28 @@ import EditTeam from './components/teams/EditTeam';
 import Dashboard from './components/dashboard/Dashboard';
 import RetroSession from './components/retro/session/RetroSession';
 
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DndProvider } from 'react-dnd';
+
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
-        <div className="App">
-          <Navbar />
-          <Switch>
-            <Route exact path='/' component={Dashboard} />
-            <Route path='/signin' component={SignIn} />
-            <Route path='/signup' component={SignUp} />
-            <Route path='/dashboard' component={Dashboard} />
-            <Route path="/teams/:id" component={EditTeam} />
-            <Route path='/teams' component={ManageTeams} />
-            <Route path='/retro' component={RetroSession} />
-          </Switch>
-        </div>
-      </BrowserRouter>
+      <DndProvider backend={HTML5Backend}>
+        <BrowserRouter>
+          <div className="App">
+            <Navbar />
+            <Switch>
+              <Route exact path='/' component={Dashboard} />
+              <Route path='/signin' component={SignIn} />
+              <Route path='/signup' component={SignUp} />
+              <Route path='/dashboard' component={Dashboard} />
+              <Route path="/teams/:id" component={EditTeam} />
+              <Route path='/teams' component={ManageTeams} />
+              <Route path='/retro' component={RetroSession} />
+            </Switch>
+          </div>
+        </BrowserRouter>
+      </DndProvider>
     );
   }
 }

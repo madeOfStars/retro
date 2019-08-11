@@ -12,6 +12,7 @@ class ModalNewNote extends Component {
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.cleanForm = this.cleanForm.bind(this);
     }
@@ -25,6 +26,12 @@ class ModalNewNote extends Component {
         this.setState({
             [e.target.name]: e.target.value
         });
+    }
+
+    handleKeyPress(e) {
+        if (e.key === 'Enter') {
+            this.handleSubmit();
+        }
     }
 
     cleanForm() {
