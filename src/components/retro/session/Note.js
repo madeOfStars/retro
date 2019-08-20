@@ -23,7 +23,7 @@ class Note extends Component {
 
     render() {
         const { color, note } = this.props;
-        console.log(this.props);
+
         return (
             <div className={compose(noteStyle.note, color)} style={this.generateStyle()} >
                 <p>{note.text}</p>

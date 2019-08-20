@@ -5,6 +5,17 @@ import { compose } from '../../commons/ClassComposer';
 
 import targetStyle from './css/Target.module.css';
 
+const target = {
+    hover(props, monitor, component) {
+        console.log(monitor.getClientOffset().x);
+        return;
+    },
+    drop(props, monitor, component) {
+        console.log(monitor.getClientOffset().x);
+        return props;
+    }
+}
+
 class Target extends Component {
     render() {
         const { notes, color } = this.props;
@@ -31,4 +42,4 @@ const collect = (connect, monitor) => {
     }
 }
 
-export default DropTarget('item', {}, collect)(Target);
+export default DropTarget('item', target, collect)(Target);
