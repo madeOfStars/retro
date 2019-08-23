@@ -13,6 +13,8 @@ class Note extends Component {
 
     generateStyle() {
         return {
+            left: this.props.positionStyle.x,
+            top: this.props.positionStyle.y,
             transform: 'rotate(' + this.randomBetween(-15, 15) + 'deg)',
         }
     }

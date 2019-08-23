@@ -5,13 +5,15 @@ import { compose } from '../../commons/ClassComposer';
 
 import targetStyle from './css/Target.module.css';
 
+const positionStyle = {
+    x: 0,
+    y: 0
+}
+
 const target = {
-    hover(props, monitor, component) {
-        console.log(monitor.getClientOffset().x);
-        return;
-    },
     drop(props, monitor, component) {
-        console.log(monitor.getClientOffset().x);
+        positionStyle.x = monitor.getClientOffset().x;
+        positionStyle.y = monitor.getClientOffset().y;
         return props;
     }
 }
@@ -22,8 +24,14 @@ class Target extends Component {
         const { connectDropTarget, hovered } = this.props;
         const backgroundColor = hovered ? 'lightyellow' : 'white';
 
+        console.log(target);
+
         const allNotes = notes.map(note => {
-            return <Note note={note} color={color} />
+            return <Note
+                key={note.id}
+                note={note}
+                color={color}
+                positionStyle={positionStyle} />
         });
 
         return connectDropTarget(
