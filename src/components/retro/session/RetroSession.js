@@ -79,6 +79,7 @@ class RetroSession extends Component {
 
     render() {
         const { phases, currentPhase } = this.state;
+        const retroId = this.props.match.params.id;
 
         return (
             <div>
@@ -87,7 +88,7 @@ class RetroSession extends Component {
                     retrieveValidPhases={this.retrieveValidPhases()}
                     getNextPhaseButton={this.getNextPhaseButton()}
                 />
-                <PhaseChooser phase={phases[currentPhase -1]} />
+                <PhaseChooser phase={phases[currentPhase - 1]} retroId={retroId} />
             </div>
         );
     }

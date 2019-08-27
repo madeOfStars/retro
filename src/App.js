@@ -25,7 +25,7 @@ class App extends Component {
               <Route path='/dashboard' component={Dashboard} />
               <Route path="/teams/:id" component={EditTeam} />
               <Route path='/teams' component={ManageTeams} />
-              <Route path='/retro' component={RetroSession} />
+              <Route path="/retro/:id" component={RetroSession} />
             </Switch>
           </div>
         </BrowserRouter>

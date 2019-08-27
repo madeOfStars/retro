@@ -25,3 +25,16 @@ export const deleteRetro = (retroId) => {
             })
     }
 }
+
+export const addNewNote = (note, retroId, phase) => {
+    return (dispatch, getState, { getFirebase }) => {
+        const firebase = getFirebase();
+
+        firebase.push(`notes/${retroId}/${phase}`)
+            .then(() => {
+                dispatch({ type: actionTypes.ADD_NEW_NOTE.SUCCESS });
+            }).catch((err) => {
+                dispatch({ type: actionTypes.ADD_NEW_NOTE.ERROR, err });
+            })
+    }
+}

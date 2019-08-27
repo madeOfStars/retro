@@ -16,7 +16,7 @@ class Container extends Component {
     }
 
     render() {
-        const { phase, header, addNewPersonalNote, personalNotes, notes } = this.props;
+        const { phase, header, addNewPersonalNote, personalNotes, notes, retroId } = this.props;
 
         const pNotes = personalNotes.map((personalNote, i) => {
             const indexableNote = {
@@ -32,7 +32,7 @@ class Container extends Component {
 
         return (
             <div className="row">
-                <Target notes={notes} color={phase.color} />
+                <Target notes={notes} color={phase.color} retroId={retroId} phase={phase} />
                 <div className="col s2">
                     {pNotes}
                     <ModalNewNote

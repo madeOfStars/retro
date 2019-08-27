@@ -26,6 +26,16 @@ const retroReducer = (state = initialState, action) => {
                 ...state,
                 retroError: action.err.message
             }
+        case actionTypes.ADD_NEW_NOTE.SUCCESS:
+            return {
+                ...state,
+                retroError: null
+            }
+        case actionTypes.ADD_NEW_NOTE.ERROR:
+            return {
+                ...state,
+                retroError: action.err.message
+            }
         default:
             return state;
     }

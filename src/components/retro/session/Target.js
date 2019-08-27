@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { DropTarget } from 'react-dnd';
 import Note from './Note';
 import { compose } from '../../commons/ClassComposer';
+
+import { addNewNote } from '../../../store/actions/retro/retroActions';
 
 import targetStyle from './css/Target.module.css';
 
@@ -12,8 +15,18 @@ const positionStyle = {
 
 const target = {
     drop(props, monitor, component) {
+        const { retroId, phase } = props;
+
         positionStyle.x = monitor.getClientOffset().x;
         positionStyle.y = monitor.getClientOffset().y;
+
+        // const note = {
+        //     text: props.note.text,
+        //     position: positionStyle
+        // }
+
+        console.log(props);
+
         return props;
     }
 }
@@ -23,8 +36,6 @@ class Target extends Component {
         const { notes, color } = this.props;
         const { connectDropTarget, hovered } = this.props;
         const backgroundColor = hovered ? 'lightyellow' : 'white';
-
-        console.log(target);
 
         const allNotes = notes.map(note => {
             return <Note
@@ -50,4 +61,10 @@ const collect = (connect, monitor) => {
     }
 }
 
-export default DropTarget('item', target, collect)(Target);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addNewNote: (note, retroId, phase) => dispatch(addNewNote(note, retroId, phase))
+    }
+}
+
+export default DropTarget('item', target, collect)(connect(null, mapDispatchToProps)(Target));

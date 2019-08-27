@@ -35,6 +35,10 @@ const actionTypes = {
     DELETE_RETRO: {
         SUCCESS: 'DELETE_RETRO_SUCCESSE',
         ERROR: 'DELETE_RETRO_ERROR'
+    },
+    ADD_NEW_NOTE: {
+        SUCCESS: 'ADD_NEW_NOTE_SUCCESS',
+        ERROR: 'ADD_NEW_NOTE_ERROR'
     }
 }
 

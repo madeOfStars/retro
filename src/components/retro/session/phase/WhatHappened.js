@@ -36,7 +36,7 @@ class WhatHappened extends Component {
     }
 
     render() {
-        const { phase } = this.props;
+        const { phase, retroId } = this.props;
         return (
             <Container
                 phase={phase}
@@ -45,6 +45,7 @@ class WhatHappened extends Component {
                 personalNotes={this.state.personalNotes}
                 addNewNote={this.addNewWhatHappened}
                 notes={this.state.whatHappenedNotes}
+                retroId={retroId}
             />
         );
     }
