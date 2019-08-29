@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { firebaseConnect } from 'react-redux-firebase';
 import Container from '../Container'
+import { addNewNote } from '../../../../store/actions/retro/retroActions';
 
 class WhatHappened extends Component {
 
@@ -7,8 +11,7 @@ class WhatHappened extends Component {
         super(props);
 
         this.state = {
-            personalNotes: [],
-            whatHappenedNotes: []
+            personalNotes: []
         }
 
         this.addNewPersonalNote = this.addNewPersonalNote.bind(this);
@@ -29,14 +32,28 @@ class WhatHappened extends Component {
     }
 
     addNewWhatHappened(note) {
-        this.setState(prevState => ({
-            whatHappenedNotes: [...prevState.whatHappenedNotes, note]
-        }));
+        const { phase, retroId } = this.props;
         this.deletePersonalNote(note);
+        this.props.addNewNote(note, retroId, phase);
     }
 
     render() {
-        const { phase, retroId } = this.props;
+        const { phase, notes, retroId } = this.props;
+
+        let finalNotes = [];
+
+        if (notes !== undefined && notes !==null) {
+            const notesByRetroId = notes[retroId];
+            const notesByPhase = notesByRetroId['WHAT_HAPPENDED'];
+
+            finalNotes = Object.entries(notesByPhase).map(entry => {
+                return {
+                    key: entry[0],
+                    value: entry[1]
+                };
+            });
+        }
+
         return (
             <Container
                 phase={phase}
@@ -44,11 +61,26 @@ class WhatHappened extends Component {
                 addNewPersonalNote={this.addNewPersonalNote}
                 personalNotes={this.state.personalNotes}
                 addNewNote={this.addNewWhatHappened}
-                notes={this.state.whatHappenedNotes}
-                retroId={retroId}
+                notes={finalNotes}
             />
         );
     }
 }
 
-export default WhatHappened;
+const mapStateToProps = (state) => {
+    return {
+        notes: state.firebase.data.notes
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addNewNote: (note, retroId, phase) => dispatch(addNewNote(note, retroId, phase))
+    }
+}
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    firebaseConnect([
+        { path: 'notes' }
+    ]))(WhatHappened);

@@ -16,7 +16,7 @@ class Container extends Component {
     }
 
     render() {
-        const { phase, header, addNewPersonalNote, personalNotes, notes, retroId } = this.props;
+        const { phase, header, addNewPersonalNote, personalNotes, notes } = this.props;
 
         const pNotes = personalNotes.map((personalNote, i) => {
             const indexableNote = {
@@ -26,13 +26,12 @@ class Container extends Component {
             return <PersonalNote
                 key={i} color={phase.color}
                 personalNote={indexableNote}
-                handleDrop={this.deletePersonalNote}
             />;
         });
 
         return (
             <div className="row">
-                <Target notes={notes} color={phase.color} retroId={retroId} phase={phase} />
+                <Target notes={notes} color={phase.color} handleDrop={this.deletePersonalNote} />
                 <div className="col s2">
                     {pNotes}
                     <ModalNewNote

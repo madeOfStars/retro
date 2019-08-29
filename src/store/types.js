@@ -33,7 +33,7 @@ const actionTypes = {
         ERROR: 'CREATE_NEW_RETRO_SESSION_ERROR'
     },
     DELETE_RETRO: {
-        SUCCESS: 'DELETE_RETRO_SUCCESSE',
+        SUCCESS: 'DELETE_RETRO_SUCCESS',
         ERROR: 'DELETE_RETRO_ERROR'
     },
     ADD_NEW_NOTE: {

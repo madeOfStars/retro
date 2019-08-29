@@ -30,9 +30,9 @@ export const addNewNote = (note, retroId, phase) => {
     return (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();
 
-        firebase.push(`notes/${retroId}/${phase}`)
+        firebase.push(`notes/${retroId}/${phase.identifier}`, note)
             .then(() => {
-                dispatch({ type: actionTypes.ADD_NEW_NOTE.SUCCESS });
+                dispatch({ type: actionTypes.ADD_NEW_NOTE.SUCCESS, note });
             }).catch((err) => {
                 dispatch({ type: actionTypes.ADD_NEW_NOTE.ERROR, err });
             })

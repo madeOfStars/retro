@@ -11,10 +11,10 @@ class Note extends Component {
         this.generateStyle = this.generateStyle.bind(this)
     }
 
-    generateStyle() {
+    generateStyle(positionStyle) {
         return {
-            left: this.props.positionStyle.x,
-            top: this.props.positionStyle.y,
+            left: positionStyle.x,
+            top: positionStyle.y,
             transform: 'rotate(' + this.randomBetween(-15, 15) + 'deg)',
         }
     }
@@ -27,7 +27,7 @@ class Note extends Component {
         const { color, note } = this.props;
 
         return (
-            <div className={compose(noteStyle.note, color)} style={this.generateStyle()} >
+            <div className={compose(noteStyle.note, color)} style={this.generateStyle(note.positionStyle)} >
                 <p>{note.text}</p>
             </div>
         );

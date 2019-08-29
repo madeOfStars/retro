@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { DropTarget } from 'react-dnd';
 import Note from './Note';
 import { compose } from '../../commons/ClassComposer';
-
-import { addNewNote } from '../../../store/actions/retro/retroActions';
 
 import targetStyle from './css/Target.module.css';
 
@@ -15,19 +12,16 @@ const positionStyle = {
 
 const target = {
     drop(props, monitor, component) {
-        const { retroId, phase } = props;
 
         positionStyle.x = monitor.getClientOffset().x;
         positionStyle.y = monitor.getClientOffset().y;
 
-        // const note = {
-        //     text: props.note.text,
-        //     position: positionStyle
-        // }
+        const note = {
+            text: monitor.getItem().text,
+            positionStyle
+        }
 
-        console.log(props);
-
-        return props;
+        return props.handleDrop(note);
     }
 }
 
@@ -37,12 +31,14 @@ class Target extends Component {
         const { connectDropTarget, hovered } = this.props;
         const backgroundColor = hovered ? 'lightyellow' : 'white';
 
-        const allNotes = notes.map(note => {
+        let allNotes = notes !== undefined ? notes : [];
+
+        allNotes = notes.map(note => {
             return <Note
-                key={note.id}
-                note={note}
+                key={note.key}
+                note={note.value}
                 color={color}
-                positionStyle={positionStyle} />
+            />
         });
 
         return connectDropTarget(
@@ -61,10 +57,4 @@ const collect = (connect, monitor) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addNewNote: (note, retroId, phase) => dispatch(addNewNote(note, retroId, phase))
-    }
-}
-
-export default DropTarget('item', target, collect)(connect(null, mapDispatchToProps)(Target));
+export default DropTarget('item', target, collect)(Target);
