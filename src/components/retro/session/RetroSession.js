@@ -62,6 +62,7 @@ class RetroSession extends Component {
     }
 
     getNextPhaseButton() {
+        console.log('test');
         const { phases, currentPhase } = this.state;
 
         const color = currentPhase !== phases.length ? phases[currentPhase].phase.color : "grey darken-3";
