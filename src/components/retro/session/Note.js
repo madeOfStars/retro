@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { compose } from '../../commons/ClassComposer';
 
 import noteStyle from './css/Note.module.css';
+import { incrementZIndex } from '../../commons/Z_Index';
 
 class Note extends Component {
 
@@ -9,6 +10,10 @@ class Note extends Component {
         super(props);
 
         this.generateStyle = this.generateStyle.bind(this)
+    }
+
+    testZIndex() {
+        incrementZIndex('WHAT_HAPPENDED');
     }
 
     generateStyle(positionStyle) {
@@ -27,7 +32,11 @@ class Note extends Component {
         const { color, note } = this.props;
 
         return (
-            <div className={compose(noteStyle.note, color)} style={this.generateStyle(note.positionStyle)} >
+            <div
+                className={compose(noteStyle.note, color)}
+                style={this.generateStyle(note.positionStyle)}
+                onClick={() => this.testZIndex()}
+            >
                 <p>{note.text}</p>
             </div>
         );
