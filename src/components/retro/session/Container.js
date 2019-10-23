@@ -31,7 +31,7 @@ class Container extends Component {
 
         return (
             <div className="row">
-                <Target notes={notes} color={phase.color} handleDrop={this.deletePersonalNote} />
+                <Target notes={notes} phase={phase} handleDrop={this.deletePersonalNote} />
                 <div className="col s2">
                     {pNotes}
                     <ModalNewNote

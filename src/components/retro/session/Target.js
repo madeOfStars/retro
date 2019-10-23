@@ -27,7 +27,7 @@ const target = {
 
 class Target extends Component {
     render() {
-        const { notes, color } = this.props;
+        const { notes, phase } = this.props;
         const { connectDropTarget, hovered } = this.props;
         const backgroundColor = hovered ? 'lightyellow' : 'white';
 
@@ -37,7 +37,7 @@ class Target extends Component {
             return <Note
                 key={note.key}
                 note={note.value}
-                color={color}
+                phase={phase}
             />
         });
 

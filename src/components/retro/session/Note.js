@@ -12,8 +12,24 @@ class Note extends Component {
         this.generateStyle = this.generateStyle.bind(this)
     }
 
-    testZIndex() {
-        incrementZIndex('WHAT_HAPPENDED');
+    changeZIndex(e, phase) {
+        var target = this.selectNoteTarget(e);
+        target.style.zIndex = incrementZIndex(phase.identifier);
+    }
+
+    selectNoteTarget(e) {
+        var target = e.target;
+        var parent = target.parentElement;
+        
+        if (target.id === "note") {
+            return target;
+        }
+
+        if (parent.id === "note") {
+            return parent;
+        }
+
+        return null;
     }
 
     generateStyle(positionStyle) {
@@ -29,15 +45,15 @@ class Note extends Component {
     }
 
     render() {
-        const { color, note } = this.props;
+        const { phase, note } = this.props;
 
         return (
-            <div
-                className={compose(noteStyle.note, color)}
+            <div id="note" 
+                className={compose(noteStyle.note, phase.color)}
                 style={this.generateStyle(note.positionStyle)}
-                onClick={() => this.testZIndex()}
+                onClick={(e) => this.changeZIndex(e, phase)}
             >
-                <p>{note.text}</p>
+                <p id="text">{note.text}</p>
             </div>
         );
     }

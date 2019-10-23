@@ -1,12 +1,13 @@
-const zIndexes = {
-    'WHAT_HAPPENDED' : 100,
-    'POSITIVES_AND_NEGATIVES': 200,
-    'CLUSTERING': 400
-}
+import { RETRO_PHASE } from '../../commons/Constants';
+
+var zIndexMap = {};
+zIndexMap[RETRO_PHASE.WHAT_HAPPENDED.identifier] = 100;
+zIndexMap[RETRO_PHASE.POSITIVES_AND_NEGATIVES.identifier] = 200;
+zIndexMap[RETRO_PHASE.CLUSTERING.identifier] = 400;
 
 export const incrementZIndex = (phase) => {
-    let index = zIndexes.WHAT_HAPPENDED;
+    let index = zIndexMap[phase];
     index++;
-    zIndexes.WHAT_HAPPENDED = index;
-    console.log(zIndexes.WHAT_HAPPENDED);
+    zIndexMap[phase] = index;
+    return zIndexMap[phase];
 }
