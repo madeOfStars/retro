@@ -54,7 +54,13 @@ class ModalNewNote extends Component {
                 }
             >
                 <Row>
-                    <Input name="noteText" s={12} placeholder="Team Name" onChange={this.handleChange} value={this.state.noteText} />
+                    <Input
+                        name="noteText"
+                        s={12} placeholder="Note"
+                        onChange={this.handleChange}
+                        value={this.state.noteText}
+                        onKeyPress={this.handleKeyPress}
+                    />
                 </Row>
             </Modal>
         );
