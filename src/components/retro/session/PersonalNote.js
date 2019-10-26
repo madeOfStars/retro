@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Icon } from 'react-materialize';
 import { compose } from '../../commons/ClassComposer'
 import personalNoteStyle from './css/PersonalNote.module.css';
 
@@ -27,6 +28,14 @@ class PersonalNote extends Component {
                 <p>
                     {personalNote.text}
                 </p>
+                <div className="right-align">
+                    <icon className="material-icons" style={{marginRight: 10}}>
+                        edit
+                    </icon>
+                    <Icon>
+                        delete
+                    </Icon>
+                </div>
             </div>
         );
     }
