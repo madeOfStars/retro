@@ -18,6 +18,17 @@ const itemSource = {
 }
 
 class PersonalNote extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.deletePersonalNote = this.deletePersonalNote.bind(this);
+    }
+
+    deletePersonalNote() {
+        console.log('PO');
+    }
+
     render() {
         const { color, personalNote } = this.props;
         const { isDragging, connectDragSource } = this.props;
@@ -32,7 +43,7 @@ class PersonalNote extends Component {
                     <icon className="material-icons" style={{marginRight: 10}}>
                         edit
                     </icon>
-                    <Icon>
+                    <Icon onClick={this.deletePersonalNote}>
                         delete
                     </Icon>
                 </div>
