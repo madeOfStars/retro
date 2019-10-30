@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Icon } from 'react-materialize';
 import { compose } from '../../commons/ClassComposer'
 import personalNoteStyle from './css/PersonalNote.module.css';
 
@@ -25,8 +24,8 @@ class PersonalNote extends Component {
         this.deletePersonalNote = this.deletePersonalNote.bind(this);
     }
 
-    deletePersonalNote() {
-        console.log('PO');
+    deletePersonalNote(personalNote) {
+        this.props.deletePersonalNote(personalNote);
     }
 
     render() {
@@ -40,12 +39,12 @@ class PersonalNote extends Component {
                     {personalNote.text}
                 </p>
                 <div className="right-align">
-                    <icon className="material-icons" style={{marginRight: 10}}>
+                    <i className="material-icons" style={{marginRight: 10}}>
                         edit
-                    </icon>
-                    <Icon onClick={this.deletePersonalNote}>
+                    </i>
+                    <i className="material-icons" onClick={() => this.deletePersonalNote(personalNote)}>
                         delete
-                    </Icon>
+                    </i>
                 </div>
             </div>
         );

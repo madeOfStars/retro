@@ -5,18 +5,12 @@ import Target from './Target';
 
 class Container extends Component {
 
-    constructor(props) {
-        super(props)
-
-        this.deletePersonalNote = this.deletePersonalNote.bind(this);
-    }
-
     deletePersonalNote = (indexableNote) => {
         this.props.addNewNote(indexableNote);
     }
 
     render() {
-        const { phase, header, addNewPersonalNote, personalNotes, notes } = this.props;
+        const { phase, header, addNewPersonalNote, personalNotes, notes, deletePersonalNote } = this.props;
 
         const pNotes = personalNotes.map((personalNote, i) => {
             const indexableNote = {
@@ -26,6 +20,7 @@ class Container extends Component {
             return <PersonalNote
                 key={i} color={phase.color}
                 personalNote={indexableNote}
+                deletePersonalNote={deletePersonalNote}
             />;
         });
 

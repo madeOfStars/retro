@@ -62,6 +62,7 @@ class WhatHappened extends Component {
                 personalNotes={this.state.personalNotes}
                 addNewNote={this.addNewWhatHappened}
                 notes={finalNotes}
+                deletePersonalNote={this.deletePersonalNote}
             />
         );
     }
