@@ -21,25 +21,80 @@ class PersonalNote extends Component {
     constructor(props) {
         super(props);
 
-        this.deletePersonalNote = this.deletePersonalNote.bind(this);
+        this.state = {
+            editing: false,
+            newNoteText: props.personalNote.text
+        }
+
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    editModeOn() {
+        this.setState({ editing: true });
     }
 
     deletePersonalNote(personalNote) {
         this.props.deletePersonalNote(personalNote);
     }
 
-    render() {
+    handleChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
+    onSave() {
+        this.setState({ editing: false });
+    }
+
+    onClear() {
+        this.setState({ editing: false });
+    }
+
+    chooseLayout() {
+        if (this.state.editing) {
+            return this.renderForm();
+        } else {
+            return this.renderDisplay();
+        }
+    }
+
+    renderForm() {
         const { color, personalNote } = this.props;
-        const { isDragging, connectDragSource } = this.props;
+        const { isDragging } = this.props;
         const opacity = isDragging ? 0 : 1;
 
-        return connectDragSource(
+        return (
+            <div className={compose(personalNoteStyle.personalNote, color)} style={{ opacity }}>
+                <textarea
+                    name="newNoteText"
+                    defaultValue={personalNote.text}
+                    onChange={this.handleChange}
+                />
+                <div className="right-align">
+                    <i className="material-icons" onClick={() => this.onSave()} style={{ marginRight: 10 }}>
+                        check
+                    </i>
+                    <i className="material-icons" onClick={() => this.onClear()}>
+                        clear
+                    </i>
+                </div>
+            </div>
+        );
+    }
+
+    renderDisplay() {
+        const { color, personalNote } = this.props;
+        const { isDragging } = this.props;
+        const opacity = isDragging ? 0 : 1;
+
+        return (
             <div className={compose(personalNoteStyle.personalNote, color)} style={{ opacity }}>
                 <p>
-                    {personalNote.text}
+                    {this.state.newNoteText}
                 </p>
                 <div className="right-align">
-                    <i className="material-icons" style={{marginRight: 10}}>
+                    <i className="material-icons" onClick={() => this.editModeOn()} style={{ marginRight: 10 }}>
                         edit
                     </i>
                     <i className="material-icons" onClick={() => this.deletePersonalNote(personalNote)}>
@@ -47,6 +102,14 @@ class PersonalNote extends Component {
                     </i>
                 </div>
             </div>
+        );
+    }
+
+    render() {
+        const { connectDragSource } = this.props;
+
+        return connectDragSource(
+            this.chooseLayout()
         );
     }
 }
