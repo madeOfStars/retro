@@ -23,7 +23,7 @@ class PersonalNote extends Component {
 
         this.state = {
             editing: false,
-            newNoteText: props.personalNote.text
+            newNoteText: ''
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -59,6 +59,15 @@ class PersonalNote extends Component {
         }
     }
 
+    renderText() {
+        const { personalNote } = this.props;
+
+        return this.state.newNoteText === undefined
+            || this.state.newNoteText === null
+            || this.state.newNoteText === '' ?
+            personalNote.text : this.state.newNoteText;
+    }
+
     renderForm() {
         const { color, personalNote } = this.props;
         const { isDragging } = this.props;
@@ -68,7 +77,7 @@ class PersonalNote extends Component {
             <div className={compose(personalNoteStyle.personalNote, color)} style={{ opacity }}>
                 <textarea
                     name="newNoteText"
-                    defaultValue={personalNote.text}
+                    defaultValue={this.renderText()}
                     onChange={this.handleChange}
                 />
                 <div className="right-align">
@@ -91,7 +100,7 @@ class PersonalNote extends Component {
         return (
             <div className={compose(personalNoteStyle.personalNote, color)} style={{ opacity }}>
                 <p>
-                    {this.state.newNoteText}
+                    {this.renderText()}
                 </p>
                 <div className="right-align">
                     <i className="material-icons" onClick={() => this.editModeOn()} style={{ marginRight: 10 }}>
