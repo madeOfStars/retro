@@ -69,7 +69,7 @@ class PersonalNote extends Component {
     }
 
     renderForm() {
-        const { color, personalNote } = this.props;
+        const { color } = this.props;
         const { isDragging } = this.props;
         const opacity = isDragging ? 0 : 1;
 
