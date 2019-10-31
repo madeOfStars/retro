@@ -11,6 +11,7 @@ class WhatHappened extends Component {
         super(props);
 
         this.state = {
+            noteId: 100,
             personalNotes: []
         }
 
