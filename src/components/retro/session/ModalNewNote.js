@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Button, Modal, Row, Input } from 'react-materialize';
 import { compose } from '../../commons/ClassComposer';
 
+import { MAX_CHARS_PER_NOTE } from '../../../commons/Constants';
+
 class ModalNewNote extends Component {
 
     constructor(props) {
@@ -60,6 +62,7 @@ class ModalNewNote extends Component {
                         onChange={this.handleChange}
                         value={this.state.noteText}
                         onKeyPress={this.handleKeyPress}
+                        maxLength={MAX_CHARS_PER_NOTE}
                     />
                 </Row>
             </Modal>

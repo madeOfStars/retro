@@ -29,3 +29,5 @@ export const RETRO_PHASE = {
         color: "red lighten-2"
     }
 }
+
+export const MAX_CHARS_PER_NOTE = 50

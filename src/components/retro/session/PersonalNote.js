@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { compose } from '../../commons/ClassComposer'
+import { compose } from '../../commons/ClassComposer';
+import { DragSource } from 'react-dnd';
 import personalNoteStyle from './css/PersonalNote.module.css';
 
-import { DragSource } from 'react-dnd';
+import { MAX_CHARS_PER_NOTE } from '../../../commons/Constants';
 
 const itemSource = {
     beginDrag(props) {
@@ -85,6 +86,7 @@ class PersonalNote extends Component {
                     name="newNoteText"
                     defaultValue={this.renderText()}
                     onChange={this.handleChange}
+                    maxLength={MAX_CHARS_PER_NOTE}
                 />
                 <div className="right-align">
                     <i className="material-icons" onClick={() => this.onEditSave()} style={{ marginRight: 10 }}>
