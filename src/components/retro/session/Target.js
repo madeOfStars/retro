@@ -16,12 +16,10 @@ const target = {
         positionStyle.x = monitor.getClientOffset().x;
         positionStyle.y = monitor.getClientOffset().y;
 
-        const note = {
-            text: monitor.getItem().text,
+        return props.handleDrop({
+            note: monitor.getItem(),
             positionStyle
-        }
-
-        return props.handleDrop(note);
+        });
     }
 }
 

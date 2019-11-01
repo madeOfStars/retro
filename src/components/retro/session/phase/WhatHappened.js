@@ -11,7 +11,6 @@ class WhatHappened extends Component {
         super(props);
 
         this.state = {
-            noteId: 100,
             personalNotes: []
         }
 
@@ -22,20 +21,28 @@ class WhatHappened extends Component {
     }
 
     addNewPersonalNote(note) {
+        var newNote = {
+            id: Date.now(),
+            text: note
+        }
         this.setState(prevState => ({
-            personalNotes: [...prevState.personalNotes, note]
+            personalNotes: [...prevState.personalNotes, newNote]
         }));
     }
 
     deletePersonalNote(note) {
-        const filteredPersonalNotes = this.state.personalNotes.filter(item => item !== note.text);
+        const filteredPersonalNotes = this.state.personalNotes.filter(item => 
+            item.id !== note.id);
         this.setState({ personalNotes: filteredPersonalNotes });
     }
 
     addNewWhatHappened(note) {
         const { phase, retroId } = this.props;
-        this.deletePersonalNote(note);
-        this.props.addNewNote(note, retroId, phase);
+        this.deletePersonalNote(note.note);
+        this.props.addNewNote({
+            text:note.note.text, 
+            positionStyle: note.positionStyle
+        }, retroId, phase);
     }
 
     render() {
