@@ -10,13 +10,22 @@ class Container extends Component {
     }
 
     render() {
-        const { phase, header, addNewPersonalNote, personalNotes, notes, deletePersonalNote } = this.props;
+        const {
+            phase,
+            header,
+            addNewPersonalNote,
+            personalNotes,
+            notes,
+            deletePersonalNote,
+            editPersonalNote
+        } = this.props;
 
         const pNotes = personalNotes.map((personalNote) => {
             return <PersonalNote
                 key={personalNote.id} color={phase.color}
                 personalNote={personalNote}
                 deletePersonalNote={deletePersonalNote}
+                editPersonalNote={editPersonalNote}
             />;
         });
 

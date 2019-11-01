@@ -43,7 +43,13 @@ class PersonalNote extends Component {
         });
     }
 
-    onSave() {
+    onEditSave() {
+        const { personalNote } = this.props;
+
+        this.props.editPersonalNote({
+            id: personalNote.id,
+            text: this.state.newNoteText
+        });
         this.setState({ editing: false });
     }
 
@@ -81,7 +87,7 @@ class PersonalNote extends Component {
                     onChange={this.handleChange}
                 />
                 <div className="right-align">
-                    <i className="material-icons" onClick={() => this.onSave()} style={{ marginRight: 10 }}>
+                    <i className="material-icons" onClick={() => this.onEditSave()} style={{ marginRight: 10 }}>
                         check
                     </i>
                     <i className="material-icons" onClick={() => this.onClear()}>

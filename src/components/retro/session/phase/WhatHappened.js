@@ -17,6 +17,7 @@ class WhatHappened extends Component {
         this.addNewPersonalNote = this.addNewPersonalNote.bind(this);
         this.deletePersonalNote = this.deletePersonalNote.bind(this);
         this.addNewWhatHappened = this.addNewWhatHappened.bind(this);
+        this.editPersonalNote = this.editPersonalNote.bind(this);
 
     }
 
@@ -31,16 +32,22 @@ class WhatHappened extends Component {
     }
 
     deletePersonalNote(note) {
-        const filteredPersonalNotes = this.state.personalNotes.filter(item => 
+        const filteredPersonalNotes = this.state.personalNotes.filter(item =>
             item.id !== note.id);
         this.setState({ personalNotes: filteredPersonalNotes });
+    }
+
+    editPersonalNote(note) {
+        this.setState({
+            personalNotes: this.state.personalNotes.map(el => (el.id === note.id ? { ...el, text: note.text } : el))
+        });
     }
 
     addNewWhatHappened(note) {
         const { phase, retroId } = this.props;
         this.deletePersonalNote(note.note);
         this.props.addNewNote({
-            text:note.note.text, 
+            text: note.note.text,
             positionStyle: note.positionStyle
         }, retroId, phase);
     }
@@ -50,7 +57,7 @@ class WhatHappened extends Component {
 
         let finalNotes = [];
 
-        if (notes !== undefined && notes !==null) {
+        if (notes !== undefined && notes !== null) {
             const notesByRetroId = notes[retroId];
             const notesByPhase = notesByRetroId['WHAT_HAPPENDED'];
 
@@ -71,6 +78,7 @@ class WhatHappened extends Component {
                 addNewNote={this.addNewWhatHappened}
                 notes={finalNotes}
                 deletePersonalNote={this.deletePersonalNote}
+                editPersonalNote={this.editPersonalNote}
             />
         );
     }
