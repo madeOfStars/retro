@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ModalNewNote from './ModalNewNote';
+import ModalNoteChooser from './phase/modal/ModalNoteChooser';
 import PersonalNote from './PersonalNote';
 import Target from './Target';
 
@@ -34,7 +34,7 @@ class Container extends Component {
                 <Target notes={notes} phase={phase} handleDrop={this.deletePersonalNote} />
                 <div className="col s2">
                     {pNotes}
-                    <ModalNewNote
+                    <ModalNoteChooser
                         phase={phase}
                         header={header}
                         addNewPersonalNote={addNewPersonalNote}

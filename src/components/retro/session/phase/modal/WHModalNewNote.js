@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Button, Modal, Row, Input } from 'react-materialize';
-import { compose } from '../../commons/ClassComposer';
+import { compose } from '../../../../commons/ClassComposer';
 
-import { MAX_CHARS_PER_NOTE } from '../../../commons/Constants';
+import { MAX_CHARS_PER_NOTE } from '../../../../../commons/Constants';
 
-class ModalNewNote extends Component {
+class WHModalNewNote extends Component {
 
     constructor(props) {
         super(props);
@@ -70,4 +70,4 @@ class ModalNewNote extends Component {
     }
 }
 
-export default ModalNewNote;
+export default WHModalNewNote;
