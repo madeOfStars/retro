@@ -10,7 +10,7 @@ class PNModalNewNote extends Component {
         super(props);
 
         this.state = {
-            isModalOpen: false,
+            isModalOpen: true,
             color: ''
         }
 
@@ -46,6 +46,7 @@ class PNModalNewNote extends Component {
 
     componentDidMount() {
         document.addEventListener("keydown", this.escapePressed, false);
+        this.setState({ isModalOpen: false });
     }
 
     componentWillUnmount() {

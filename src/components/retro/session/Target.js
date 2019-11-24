@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { DropTarget } from 'react-dnd';
 import Note from './Note';
 import { compose } from '../../commons/ClassComposer';
+import { getPreviousPhase } from '../../../commons/OrderedPhases'
 
 import targetStyle from './css/Target.module.css';
 
@@ -24,20 +25,66 @@ const target = {
 }
 
 class Target extends Component {
-    render() {
+
+    constructor(props) {
+        super(props);
+
+        this.getNotes = this.getNotes.bind(this);
+    }
+
+    getNotes() {
         const { notes, phase } = this.props;
+
+        switch (phase.identifier) {
+            case 'WHAT_HAPPENDED':
+                return {
+                    previousNotes: { notes: [], opacity: 1 },
+                    currentNotes: { notes: notes['WHAT_HAPPENDED'], opacity: 1 }
+                }
+
+            case 'POSITIVES_AND_NEGATIVES':
+                return {
+                    previousNotes: { notes: notes['WHAT_HAPPENDED'], opacity: 0.7 },
+                    currentNotes: { notes: notes['POSITIVES_AND_NEGATIVES'], opacity: 1 }
+                }
+
+            default:
+                break;
+        }
+    }
+
+    render() {
+        const { phase } = this.props;
         const { connectDropTarget, hovered } = this.props;
         const backgroundColor = hovered ? 'lightyellow' : 'white';
 
-        let allNotes = notes !== undefined ? notes : [];
+        let allNotes = [];
+        const notesWithOpacity = this.getNotes();
 
-        allNotes = notes.map(note => {
-            return <Note
-                key={note.key}
-                note={note.value}
-                phase={phase}
-            />
-        });
+        console.log(notesWithOpacity);
+
+        if (notesWithOpacity.currentNotes.notes !== undefined && notesWithOpacity.currentNotes.notes !== null) {
+            const previousNotes = notesWithOpacity.previousNotes.notes.map(note => {
+                return <Note
+                    key={note.key}
+                    note={note.value}
+                    phase={getPreviousPhase(phase)}
+                    opacity={notesWithOpacity.previousNotes.opacity}
+                />
+            });
+
+            const currentNotes = notesWithOpacity.currentNotes.notes.map(note => {
+                return <Note
+                    key={note.key}
+                    note={note.value}
+                    phase={phase}
+                    opacity={notesWithOpacity.currentNotes.opacity}
+                />
+            });
+
+            allNotes = previousNotes.concat(currentNotes);
+        }
+
 
         return connectDropTarget(
             <div className={compose("col s10", targetStyle.target)} style={{ background: backgroundColor }}>

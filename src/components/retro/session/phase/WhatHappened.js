@@ -58,15 +58,18 @@ class WhatHappened extends Component {
         let finalNotes = [];
 
         if (notes !== undefined && notes !== null) {
+            let tmpFinalNotes = [];
             const notesByRetroId = notes[retroId];
             const notesByPhase = notesByRetroId['WHAT_HAPPENDED'];
 
-            finalNotes = Object.entries(notesByPhase).map(entry => {
+            tmpFinalNotes = Object.entries(notesByPhase).map(entry => {
                 return {
                     key: entry[0],
                     value: entry[1]
                 };
             });
+
+            finalNotes['WHAT_HAPPENDED'] = tmpFinalNotes;
         }
 
         return (

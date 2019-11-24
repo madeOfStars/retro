@@ -20,7 +20,7 @@ class Note extends Component {
     selectNoteTarget(e) {
         var target = e.target;
         var parent = target.parentElement;
-        
+
         if (target.id === "note") {
             return target;
         }
@@ -32,11 +32,12 @@ class Note extends Component {
         return null;
     }
 
-    generateStyle(positionStyle) {
+    generateStyle(positionStyle, opacity) {
         return {
+            opacity: opacity,
             left: positionStyle.x,
             top: positionStyle.y,
-            transform: 'rotate(' + this.randomBetween(-15, 15) + 'deg)',
+            transform: 'rotate(' + this.randomBetween(-15, 15) + 'deg)'
         }
     }
 
@@ -45,12 +46,12 @@ class Note extends Component {
     }
 
     render() {
-        const { phase, note } = this.props;
+        const { phase, note, opacity } = this.props;
 
         return (
-            <div id="note" 
+            <div id="note"
                 className={compose(noteStyle.note, phase.color)}
-                style={this.generateStyle(note.positionStyle)}
+                style={this.generateStyle(note.positionStyle, opacity)}
                 onClick={(e) => this.changeZIndex(e, phase)}
             >
                 <p id="text">{note.text}</p>
