@@ -61,8 +61,6 @@ class Target extends Component {
         let allNotes = [];
         const notesWithOpacity = this.getNotes();
 
-        console.log(notesWithOpacity);
-
         if (notesWithOpacity.currentNotes.notes !== undefined && notesWithOpacity.currentNotes.notes !== null) {
             const previousNotes = notesWithOpacity.previousNotes.notes.map(note => {
                 return <Note
