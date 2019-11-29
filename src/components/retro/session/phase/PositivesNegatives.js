@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { firebaseConnect } from 'react-redux-firebase';
-import Container from '../Container'
+import Container from '../Container';
+import withPhaseHoc from '../../../commons/hoc/withPhaseHoc';
 
 class PositivesNegatives extends Component {
     constructor(props) {
@@ -43,21 +41,14 @@ class PositivesNegatives extends Component {
             <Container
                 phase={phase}
                 header={"Add new note"}
-                personalNotes={[]}
+                addNewPersonalNote={this.props.addNewPersonalNote}
+                personalNotes={this.props.personalNotes}
                 notes={finalNotes}
+                deletePersonalNote={this.props.deletePersonalNote}
+                editPersonalNote={this.props.editPersonalNote}
             />
         );
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        notes: state.firebase.data.notes
-    }
-}
-
-export default compose(
-    connect(mapStateToProps, null),
-    firebaseConnect([
-        { path: 'notes' }
-    ]))(PositivesNegatives);
+export default withPhaseHoc(PositivesNegatives);
