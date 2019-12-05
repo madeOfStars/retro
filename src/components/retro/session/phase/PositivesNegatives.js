@@ -41,7 +41,7 @@ class PositivesNegatives extends Component {
             <Container
                 phase={phase}
                 header={"Add new note"}
-                addNewPersonalNote={this.props.addNewPersonalNote}
+                addNewPersonalNoteWithColor={this.props.addNewPersonalNoteWithColor}
                 personalNotes={this.props.personalNotes}
                 notes={finalNotes}
                 deletePersonalNote={this.props.deletePersonalNote}

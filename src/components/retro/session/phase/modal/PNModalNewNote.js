@@ -11,13 +11,18 @@ class PNModalNewNote extends Component {
 
         this.state = {
             isModalOpen: true,
-            color: ''
+            color: '',
+            noteText: ''
         }
 
         this.addPositiveNote = this.addPositiveNote.bind(this);
         this.addNegativeNote = this.addNegativeNote.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.escapePressed = this.escapePressed.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
+        this.cleanForm = this.cleanForm.bind(this);
     }
 
     addPositiveNote() {
@@ -34,6 +39,24 @@ class PNModalNewNote extends Component {
         });
     }
 
+    handleSubmit() {
+        this.props.addNewPersonalNoteWithColor(this.state.noteText, this.state.color);
+        this.cleanForm();
+        this.closeModal();
+    }
+
+    handleChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
+    handleKeyPress(e) {
+        if (e.key === 'Enter') {
+            this.handleSubmit();
+        }
+    }
+
     escapePressed(e) {
         if (e.keyCode === 27) {
             this.closeModal();
@@ -42,6 +65,10 @@ class PNModalNewNote extends Component {
 
     closeModal() {
         this.setState({ isModalOpen: false });
+    }
+
+    cleanForm() {
+        this.setState({ noteText: '' });
     }
 
     componentDidMount() {
@@ -87,7 +114,7 @@ class PNModalNewNote extends Component {
                 }
                 actions={
                     <div>
-                        <Button onClick={this.closeModal} modal="close" className={compose('btn', this.state.color, 'waves-effect waves-light')} style={{ marginRight: 5 }}><i className="material-icons right">send</i>Submit</Button>
+                        <Button onClick={this.handleSubmit} modal="close" className={compose('btn', this.state.color, 'waves-effect waves-light')} style={{ marginRight: 5 }}><i className="material-icons right">send</i>Submit</Button>
                         <Button onClick={this.closeModal} modal="close" className={compose('btn', this.state.color, 'waves-effect waves-light')}><i className="material-icons right">close</i>Cancel</Button>
                     </div>
                 }
@@ -97,6 +124,7 @@ class PNModalNewNote extends Component {
                         name="noteText"
                         s={12} placeholder="Note"
                         onChange={this.handleChange}
+                        value={this.state.noteText}
                         onKeyPress={this.handleKeyPress}
                         maxLength={MAX_CHARS_PER_NOTE}
                     />

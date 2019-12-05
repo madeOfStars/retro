@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase';
-import { addNewNote } from '../../../store/actions/retro/retroActions'
+import { addNewNote } from '../../../store/actions/retro/retroActions';
 
 const withPhaseHoc = WrappedComponent => {
     class WithPhaseHoc extends Component {
@@ -16,17 +16,22 @@ const withPhaseHoc = WrappedComponent => {
             this.addNewPersonalNote = this.addNewPersonalNote.bind(this);
             this.deletePersonalNote = this.deletePersonalNote.bind(this);
             this.editPersonalNote = this.editPersonalNote.bind(this);
-
+            this.addNewPersonalNoteWithColor = this.addNewPersonalNoteWithColor.bind(this);
         }
 
-        addNewPersonalNote(note) {
+        addNewPersonalNoteWithColor(note, color) {
             var newNote = {
                 id: Date.now(),
-                text: note
+                text: note,
+                color
             }
             this.setState(prevState => ({
                 personalNotes: [...prevState.personalNotes, newNote]
             }));
+        }
+
+        addNewPersonalNote(note) {
+            this.addNewPersonalNoteWithColor(note, null);
         }
 
         deletePersonalNote(note) {
@@ -44,6 +49,7 @@ const withPhaseHoc = WrappedComponent => {
         render() {
             return <WrappedComponent
                 addNewPersonalNote={this.addNewPersonalNote}
+                addNewPersonalNoteWithColor={this.addNewPersonalNoteWithColor}
                 deletePersonalNote={this.deletePersonalNote}
                 editPersonalNote={this.editPersonalNote}
                 personalNotes={this.state.personalNotes}

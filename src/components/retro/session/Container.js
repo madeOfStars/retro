@@ -14,6 +14,7 @@ class Container extends Component {
             phase,
             header,
             addNewPersonalNote,
+            addNewPersonalNoteWithColor,
             personalNotes,
             notes,
             deletePersonalNote,
@@ -38,6 +39,7 @@ class Container extends Component {
                         phase={phase}
                         header={header}
                         addNewPersonalNote={addNewPersonalNote}
+                        addNewPersonalNoteWithColor={addNewPersonalNoteWithColor}
                     />
                 </div>
             </div>

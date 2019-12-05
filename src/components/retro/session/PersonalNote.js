@@ -66,6 +66,13 @@ class PersonalNote extends Component {
         }
     }
 
+    chooseColor() {
+        const { color, personalNote } = this.props;
+
+        return personalNote.color === undefined || personalNote.color === null ? color :
+            personalNote.color;
+    }
+
     renderText() {
         const { personalNote } = this.props;
 
@@ -101,12 +108,12 @@ class PersonalNote extends Component {
     }
 
     renderDisplay() {
-        const { color, personalNote } = this.props;
+        const { personalNote } = this.props;
         const { isDragging } = this.props;
         const opacity = isDragging ? 0 : 1;
 
         return (
-            <div className={compose(personalNoteStyle.personalNote, color)} style={{ opacity }}>
+            <div className={compose(personalNoteStyle.personalNote, this.chooseColor())} style={{ opacity }}>
                 <p>
                     {this.renderText()}
                 </p>
