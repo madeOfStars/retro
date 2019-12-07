@@ -9,7 +9,8 @@ class Note extends Component {
     constructor(props) {
         super(props);
 
-        this.generateStyle = this.generateStyle.bind(this)
+        this.generateStyle = this.generateStyle.bind(this);
+        this.getColor = this.getColor.bind(this);
     }
 
     changeZIndex(e, phase) {
@@ -45,12 +46,19 @@ class Note extends Component {
         return (min + Math.ceil(Math.random() * max));
     }
 
+    getColor() {
+        const { note, phase } = this.props;
+        return note.color === undefined || note.color === null ? phase.color :
+            note.color;
+    }
+
     render() {
         const { phase, note, opacity } = this.props;
+        this.getColor();
 
         return (
             <div id="note"
-                className={compose(noteStyle.note, phase.color)}
+                className={compose(noteStyle.note, this.getColor())}
                 style={this.generateStyle(note.positionStyle, opacity)}
                 onClick={(e) => this.changeZIndex(e, phase)}
             >

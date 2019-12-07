@@ -7,6 +7,7 @@ class PositivesNegatives extends Component {
         super(props);
 
         this.getNotesPerPhase = this.getNotesPerPhase.bind(this);
+        this.addNewPNNote = this.addNewPNNote.bind(this);
     }
 
     getNotesPerPhase(phaseIdentifier, notesByRetroId) {
@@ -23,6 +24,17 @@ class PositivesNegatives extends Component {
         }
 
         return tmpFinalNotes;
+    }
+
+    addNewPNNote(note) {
+        console.log(note);
+        const { phase, retroId } = this.props;
+        this.props.deletePersonalNote(note.note);
+        this.props.addNewNote({
+            text: note.note.text,
+            color: note.note.color,
+            positionStyle: note.positionStyle
+        }, retroId, phase);
     }
 
     render() {
@@ -43,6 +55,7 @@ class PositivesNegatives extends Component {
                 header={"Add new note"}
                 addNewPersonalNoteWithColor={this.props.addNewPersonalNoteWithColor}
                 personalNotes={this.props.personalNotes}
+                addNewNote={this.addNewPNNote}
                 notes={finalNotes}
                 deletePersonalNote={this.props.deletePersonalNote}
                 editPersonalNote={this.props.editPersonalNote}
