@@ -48,6 +48,12 @@ class Target extends Component {
                     currentNotes: { notes: notes['POSITIVES_AND_NEGATIVES'], opacity: 1 }
                 }
 
+            case 'CLUSTERING':
+                return {
+                    previousNotes: { notes: notes['POSITIVES_AND_NEGATIVES'], opacity: 0.7 },
+                    currentNotes: { notes: notes['CLUSTERING'], opacity: 1 }
+                }
+
             default:
                 break;
         }

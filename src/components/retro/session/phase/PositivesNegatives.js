@@ -6,28 +6,10 @@ class PositivesNegatives extends Component {
     constructor(props) {
         super(props);
 
-        this.getNotesPerPhase = this.getNotesPerPhase.bind(this);
         this.addNewPNNote = this.addNewPNNote.bind(this);
     }
 
-    getNotesPerPhase(phaseIdentifier, notesByRetroId) {
-        let tmpFinalNotes = [];
-        const notesByPhase = notesByRetroId[phaseIdentifier];
-
-        if (notesByPhase !== undefined && notesByPhase !== null) {
-            tmpFinalNotes = Object.entries(notesByPhase).map(entry => {
-                return {
-                    key: entry[0],
-                    value: entry[1]
-                };
-            });
-        }
-
-        return tmpFinalNotes;
-    }
-
     addNewPNNote(note) {
-        console.log(note);
         const { phase, retroId } = this.props;
         this.props.deletePersonalNote(note.note);
         this.props.addNewNote({
@@ -45,8 +27,8 @@ class PositivesNegatives extends Component {
         if (notes !== undefined && notes !== null) {
             const notesByRetroId = notes[retroId];
 
-            finalNotes['WHAT_HAPPENDED'] = this.getNotesPerPhase('WHAT_HAPPENDED', notesByRetroId);
-            finalNotes['POSITIVES_AND_NEGATIVES'] = this.getNotesPerPhase('POSITIVES_AND_NEGATIVES', notesByRetroId);
+            finalNotes['WHAT_HAPPENDED'] = this.props.getNotesPerPhase('WHAT_HAPPENDED', notesByRetroId);
+            finalNotes['POSITIVES_AND_NEGATIVES'] = this.props.getNotesPerPhase('POSITIVES_AND_NEGATIVES', notesByRetroId);
         }
 
         return (

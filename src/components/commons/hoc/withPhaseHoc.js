@@ -17,6 +17,7 @@ const withPhaseHoc = WrappedComponent => {
             this.deletePersonalNote = this.deletePersonalNote.bind(this);
             this.editPersonalNote = this.editPersonalNote.bind(this);
             this.addNewPersonalNoteWithColor = this.addNewPersonalNoteWithColor.bind(this);
+            this.getNotesPerPhase = this.getNotesPerPhase.bind(this);
         }
 
         addNewPersonalNoteWithColor(note, color) {
@@ -46,6 +47,22 @@ const withPhaseHoc = WrappedComponent => {
             });
         }
 
+        getNotesPerPhase(phaseIdentifier, notesByRetroId) {
+            let tmpFinalNotes = [];
+            const notesByPhase = notesByRetroId[phaseIdentifier];
+    
+            if (notesByPhase !== undefined && notesByPhase !== null) {
+                tmpFinalNotes = Object.entries(notesByPhase).map(entry => {
+                    return {
+                        key: entry[0],
+                        value: entry[1]
+                    };
+                });
+            }
+    
+            return tmpFinalNotes;
+        }
+
         render() {
             return <WrappedComponent
                 addNewPersonalNote={this.addNewPersonalNote}
@@ -53,6 +70,7 @@ const withPhaseHoc = WrappedComponent => {
                 deletePersonalNote={this.deletePersonalNote}
                 editPersonalNote={this.editPersonalNote}
                 personalNotes={this.state.personalNotes}
+                getNotesPerPhase={this.getNotesPerPhase}
                 {...this.props}
             />
         }

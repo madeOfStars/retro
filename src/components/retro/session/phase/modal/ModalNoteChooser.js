@@ -7,9 +7,10 @@ import { RETRO_PHASE } from '../../../../../commons/Constants';
 class ModalNoteChooser extends Component {
 
     render() {
-        const { phase, header, addNewPersonalNote,addNewPersonalNoteWithColor } = this.props;
+        const { phase, header, addNewPersonalNote, addNewPersonalNoteWithColor } = this.props;
 
-        if (phase.identifier === RETRO_PHASE.WHAT_HAPPENDED.identifier) {
+        if (phase.identifier === RETRO_PHASE.WHAT_HAPPENDED.identifier
+            || phase.identifier === RETRO_PHASE.CLUSTERING.identifier) {
             return <WHModalNewNote
                 phase={phase}
                 header={header}
