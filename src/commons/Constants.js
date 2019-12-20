@@ -26,7 +26,7 @@ export const RETRO_PHASE = {
     CLUSTERING: {
         identifier: 'CLUSTERING',
         label: "Clustering",
-        color: "red lighten-2"
+        color: "orange darken-2"
     }
 }
 

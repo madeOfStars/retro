@@ -27,7 +27,11 @@ class Clustering extends Component {
         if (notes !== undefined && notes !== null) {
             const notesByRetroId = notes[retroId];
 
-            finalNotes['POSITIVES_AND_NEGATIVES'] = this.props.getNotesPerPhase('POSITIVES_AND_NEGATIVES', notesByRetroId);
+            const posAndNeg = this.props.getNotesPerPhase('POSITIVES_AND_NEGATIVES', notesByRetroId);
+
+            const onlyNegativesNotes = posAndNeg.filter(note => note.value.color === 'red');
+
+            finalNotes['POSITIVES_AND_NEGATIVES'] = onlyNegativesNotes;
             finalNotes['CLUSTERING'] = this.props.getNotesPerPhase('CLUSTERING', notesByRetroId);
         }
 
