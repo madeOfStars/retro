@@ -28,6 +28,19 @@ export const RETRO_PHASE = {
         label: "Clustering",
         color: "orange darken-2"
     }
-}
+};
 
-export const MAX_CHARS_PER_NOTE = 50
+export const MAX_CHARS_PER_NOTE = 50;
+
+export const NOTE_TYPE = {
+    PERSONAL_NOTE: 'PERSONAL_NOTE',
+    NOTE: 'NOTE'
+};
+
+export const COLOR = {}; //FIXME rename attribute color in firebase
+/**
+ * in posistive and negative notes
+ * the attribute's new value should be isPositive or just positive
+ * the color should be set client-side, using the constant
+ * above
+ */

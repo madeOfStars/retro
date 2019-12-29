@@ -1,4 +1,6 @@
 import actionTypes from '../../types';
+import { RETRO_PHASE } from '../../../commons/Constants';
+
 
 export const createNewRetroSession = (retroSession) => {
     return (dispatch, getState, { getFirebase }) => {
@@ -36,5 +38,19 @@ export const addNewNote = (note, retroId, phase) => {
             }).catch((err) => {
                 dispatch({ type: actionTypes.ADD_NEW_NOTE.ERROR, err });
             })
+    }
+}
+
+export const updateNotePosition = (retroId, noteId, positionStyle) => {
+    return (dispatch, getState, { getFirebase }) => {
+        const firebase = getFirebase();
+
+        firebase.update(`notes/${retroId}/${RETRO_PHASE.POSITIVES_AND_NEGATIVES.identifier}/${noteId}`, { positionStyle })
+            .then(() => {
+                dispatch({ type: actionTypes.UPDATE_NOTE_POSITION.SUCCESS });
+            })
+            .catch((err) => {
+                dispatch({ type: actionTypes.UPDATE_NOTE_POSITION.ERROR, err });
+            });
     }
 }

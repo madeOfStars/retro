@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase';
-import { addNewNote } from '../../../store/actions/retro/retroActions';
+import { addNewNote, updateNotePosition } from '../../../store/actions/retro/retroActions';
 
 const withPhaseHoc = WrappedComponent => {
     class WithPhaseHoc extends Component {
@@ -90,7 +90,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addNewNote: (note, retroId, phase) => dispatch(addNewNote(note, retroId, phase))
+        addNewNote: (note, retroId, phase) => dispatch(addNewNote(note, retroId, phase)),
+        updateNotePosition: (retroId, noteId, positionStyle) => dispatch(updateNotePosition(retroId, noteId, positionStyle))
     }
 }
 

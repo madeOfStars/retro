@@ -39,6 +39,10 @@ const actionTypes = {
     ADD_NEW_NOTE: {
         SUCCESS: 'ADD_NEW_NOTE_SUCCESS',
         ERROR: 'ADD_NEW_NOTE_ERROR'
+    },
+    UPDATE_NOTE_POSITION: {
+        SUCCESS: 'UPDATE_NOTE_POSITION_SUCCESS',
+        ERROR: 'UPDATE_NOTE_POSITION_ERROR'
     }
 }
 

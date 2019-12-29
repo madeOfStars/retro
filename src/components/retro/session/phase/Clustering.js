@@ -8,6 +8,7 @@ class Clustering extends Component {
         super(props);
 
         this.addNewClusteringNote = this.addNewClusteringNote.bind(this);
+        this.updateNotePosition = this.updateNotePosition.bind(this);
     }
 
     addNewClusteringNote(note) {
@@ -17,6 +18,11 @@ class Clustering extends Component {
             text: note.note.text,
             positionStyle: note.positionStyle
         }, retroId, phase);
+    }
+
+    updateNotePosition(note) {
+        const { retroId } = this.props;
+        this.props.updateNotePosition(retroId, note.noteId, note.positionStyle);
     }
 
     render() {
@@ -45,6 +51,7 @@ class Clustering extends Component {
                 notes={finalNotes}
                 deletePersonalNote={this.props.deletePersonalNote}
                 editPersonalNote={this.props.editPersonalNote}
+                updateNotePosition={this.updateNotePosition}
             />
         );
     }

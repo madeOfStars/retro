@@ -5,20 +5,18 @@ import Target from './Target';
 
 class Container extends Component {
 
-    deletePersonalNote = (indexableNote) => {
-        this.props.addNewNote(indexableNote);
-    }
-
     render() {
         const {
             phase,
             header,
             addNewPersonalNote,
+            addNewNote,
             addNewPersonalNoteWithColor,
             personalNotes,
             notes,
             deletePersonalNote,
-            editPersonalNote
+            editPersonalNote,
+            updateNotePosition
         } = this.props;
 
         const pNotes = personalNotes.map((personalNote) => {
@@ -32,7 +30,7 @@ class Container extends Component {
 
         return (
             <div className="row">
-                <Target notes={notes} phase={phase} handleDrop={this.deletePersonalNote} />
+                <Target notes={notes} phase={phase} handleDrop={addNewNote} updateNotePosition={updateNotePosition} />
                 <div className="col s2">
                     {pNotes}
                     <ModalNoteChooser

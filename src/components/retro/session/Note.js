@@ -1,8 +1,29 @@
 import React, { Component } from 'react';
 import { compose } from '../../commons/ClassComposer';
+import { DragSource } from 'react-dnd';
 
 import noteStyle from './css/Note.module.css';
 import { incrementZIndex } from '../../commons/Z_Index';
+import { RETRO_PHASE, NOTE_TYPE } from '../../../commons/Constants';
+
+const noteSource = {
+    canDrag(props) {
+        const color = props.note.color;
+        return props.currentPhase === RETRO_PHASE.CLUSTERING && color !== null && color === 'red';
+    },
+    beginDrag(props) {
+        return {
+            item: props.fKey,
+            itemType: NOTE_TYPE.NOTE
+        }
+    },
+    endDrag(props, monitor, component) {
+        if (!monitor.didDrop()) {
+            return;
+        }
+        return props.fKey;
+    }
+}
 
 class Note extends Component {
 
@@ -53,10 +74,10 @@ class Note extends Component {
     }
 
     render() {
-        const { phase, note, opacity } = this.props;
+        const { phase, note, opacity, connectDragSource } = this.props;
         this.getColor();
 
-        return (
+        return connectDragSource(
             <div id="note"
                 className={compose(noteStyle.note, this.getColor())}
                 style={this.generateStyle(note.positionStyle, opacity)}
@@ -68,4 +89,12 @@ class Note extends Component {
     }
 }
 
-export default Note;
+const collect = (connect, monitor) => {
+    return {
+        connectDragSource: connect.dragSource(),
+        connectDragPreview: connect.dragPreview(),
+        isDragging: monitor.isDragging()
+    }
+}
+
+export default DragSource('item', noteSource, collect)(Note);

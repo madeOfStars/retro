@@ -3,11 +3,14 @@ import { compose } from '../../commons/ClassComposer';
 import { DragSource } from 'react-dnd';
 import personalNoteStyle from './css/PersonalNote.module.css';
 
-import { MAX_CHARS_PER_NOTE } from '../../../commons/Constants';
+import { MAX_CHARS_PER_NOTE, NOTE_TYPE } from '../../../commons/Constants';
 
 const itemSource = {
     beginDrag(props) {
-        return props.personalNote;
+        return {
+            item: props.personalNote,
+            itemType: NOTE_TYPE.PERSONAL_NOTE
+        };
     },
     endDrag(props, monitor, component) {
         if (!monitor.didDrop()) {
