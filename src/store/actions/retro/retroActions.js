@@ -1,5 +1,5 @@
 import actionTypes from '../../types';
-import { RETRO_PHASE } from '../../../commons/Constants';
+import { RETRO_PHASE, RETRO_STATUS } from '../../../commons/Constants';
 
 
 export const createNewRetroSession = (retroSession) => {
@@ -51,6 +51,20 @@ export const updateNotePosition = (retroId, noteId, positionStyle) => {
             })
             .catch((err) => {
                 dispatch({ type: actionTypes.UPDATE_NOTE_POSITION.ERROR, err });
+            });
+    }
+}
+
+export const closeRetroSession = (retroId) => {
+    return (dispatch, getState, { getFirebase }) => {
+        const firebase = getFirebase();
+
+        firebase.update(`retros/${retroId}`, { status: RETRO_STATUS.CLOSED.status })
+            .then(() => {
+                dispatch({ type: actionTypes.CLOSE_RETRO_SESSION.SUCCESS });
+            })
+            .catch((err) => {
+                dispatch({ type: actionTypes.CLOSE_RETRO_SESSION.ERROR, err });
             });
     }
 }
