@@ -5,13 +5,27 @@ import Target from './Target';
 
 class Container extends Component {
 
+    showModal = () => {
+        const { noModal, phase, header, addNewPersonalNote, addNewPersonalNoteWithColor } = this.props;
+
+        if (!noModal) {
+            return (
+                <ModalNoteChooser
+                    phase={phase}
+                    header={header}
+                    addNewPersonalNote={addNewPersonalNote}
+                    addNewPersonalNoteWithColor={addNewPersonalNoteWithColor}
+                />
+            );
+        }
+    }
+
     render() {
         const {
+            noModal,
             phase,
-            header,
-            addNewPersonalNote,
+            noteType,
             addNewNote,
-            addNewPersonalNoteWithColor,
             personalNotes,
             notes,
             deletePersonalNote,
@@ -22,6 +36,7 @@ class Container extends Component {
         const pNotes = personalNotes.map((personalNote) => {
             return <PersonalNote
                 key={personalNote.id} color={phase.color}
+                showEdit={!noModal}
                 personalNote={personalNote}
                 deletePersonalNote={deletePersonalNote}
                 editPersonalNote={editPersonalNote}
@@ -30,15 +45,16 @@ class Container extends Component {
 
         return (
             <div className="row">
-                <Target notes={notes} phase={phase} handleDrop={addNewNote} updateNotePosition={updateNotePosition} />
+                <Target
+                    notes={notes}
+                    noteType={noteType}
+                    phase={phase}
+                    handleDrop={addNewNote}
+                    updateNotePosition={updateNotePosition}
+                />
                 <div className="col s2">
                     {pNotes}
-                    <ModalNoteChooser
-                        phase={phase}
-                        header={header}
-                        addNewPersonalNote={addNewPersonalNote}
-                        addNewPersonalNoteWithColor={addNewPersonalNoteWithColor}
-                    />
+                    {this.showModal()}
                 </div>
             </div>
         );

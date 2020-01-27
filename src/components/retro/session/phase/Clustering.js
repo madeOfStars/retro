@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import Container from '../Container';
+import { Button } from 'react-materialize';
 import withPhaseHoc from '../../../commons/hoc/withPhaseHoc';
+import NoteWithScore from '../NoteWithScore';
+
+import { TOTAL_VOTES } from '../../../../commons/Constants';
 
 class Clustering extends Component {
 
@@ -9,6 +13,11 @@ class Clustering extends Component {
 
         this.addNewClusteringNote = this.addNewClusteringNote.bind(this);
         this.updateNotePosition = this.updateNotePosition.bind(this);
+        this.addEmptyPersonalNote = this.addEmptyPersonalNote.bind(this);
+
+        this.state = {
+            votes: TOTAL_VOTES
+        }
     }
 
     addNewClusteringNote(note) {
@@ -23,6 +32,10 @@ class Clustering extends Component {
     updateNotePosition(note) {
         const { retroId } = this.props;
         this.props.updateNotePosition(retroId, note.noteId, note.positionStyle);
+    }
+
+    addEmptyPersonalNote() {
+        this.props.addNewPersonalNote('');
     }
 
     render() {
@@ -42,17 +55,28 @@ class Clustering extends Component {
         }
 
         return (
-            <Container
-                phase={phase}
-                header={"Add new note"}
-                addNewPersonalNote={this.props.addNewPersonalNote}
-                personalNotes={this.props.personalNotes}
-                addNewNote={this.addNewClusteringNote}
-                notes={finalNotes}
-                deletePersonalNote={this.props.deletePersonalNote}
-                editPersonalNote={this.props.editPersonalNote}
-                updateNotePosition={this.updateNotePosition}
-            />
+            <div>
+                <Container
+                    noModal
+                    phase={phase}
+                    noteType={NoteWithScore}
+                    header={"Add new note"}
+                    personalNotes={this.props.personalNotes}
+                    addNewNote={this.addNewClusteringNote}
+                    notes={finalNotes}
+                    deletePersonalNote={this.props.deletePersonalNote}
+                    editPersonalNote={this.props.editPersonalNote}
+                    updateNotePosition={this.updateNotePosition}
+                />
+
+                <Button
+                    floating
+                    large
+                    onClick={this.addEmptyPersonalNote}
+                    className={phase.color} waves='light' icon='add'
+                    style={{ position: 'fixed', bottom: '24px', right: '24px' }}
+                />
+            </div>
         );
     }
 }

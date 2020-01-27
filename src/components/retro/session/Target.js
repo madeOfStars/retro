@@ -74,6 +74,7 @@ class Target extends Component {
 
     render() {
         const { phase } = this.props;
+        const NoteType = this.props.noteType;
         const { connectDropTarget, hovered } = this.props;
         const backgroundColor = hovered ? 'lightyellow' : 'white';
 
@@ -93,7 +94,7 @@ class Target extends Component {
             });
 
             const currentNotes = notesWithOpacity.currentNotes.notes.map(note => {
-                return <Note
+                return <NoteType
                     key={note.key}
                     fKey={note.key}
                     note={note.value}
