@@ -6,7 +6,14 @@ import Target from './Target';
 class Container extends Component {
 
     showModal = () => {
-        const { noModal, phase, header, addNewPersonalNote, addNewPersonalNoteWithColor } = this.props;
+        const {
+            noModal,
+            phase,
+            header,
+            addNewPersonalNote,
+            addNewPersonalNoteWithColor
+        } = this.props;
+
 
         if (!noModal) {
             return (
@@ -23,6 +30,7 @@ class Container extends Component {
     render() {
         const {
             noModal,
+            retroId,
             phase,
             noteType,
             addNewNote,
@@ -48,6 +56,7 @@ class Container extends Component {
                 <Target
                     notes={notes}
                     noteType={noteType}
+                    retroId={retroId}
                     phase={phase}
                     handleDrop={addNewNote}
                     updateNotePosition={updateNotePosition}

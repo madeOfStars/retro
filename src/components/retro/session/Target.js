@@ -73,7 +73,7 @@ class Target extends Component {
     }
 
     render() {
-        const { phase } = this.props;
+        const { retroId, phase } = this.props;
         const NoteType = this.props.noteType;
         const { connectDropTarget, hovered } = this.props;
         const backgroundColor = hovered ? 'lightyellow' : 'white';
@@ -98,6 +98,7 @@ class Target extends Component {
                     key={note.key}
                     fKey={note.key}
                     note={note.value}
+                    retroId={retroId}
                     phase={phase}
                     opacity={notesWithOpacity.currentNotes.opacity}
                 />

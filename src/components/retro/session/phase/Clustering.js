@@ -58,6 +58,7 @@ class Clustering extends Component {
             <div>
                 <Container
                     noModal
+                    retroId={retroId}
                     phase={phase}
                     noteType={NoteWithScore}
                     header={"Add new note"}
