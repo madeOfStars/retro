@@ -14,9 +14,11 @@ class Clustering extends Component {
         this.addNewClusteringNote = this.addNewClusteringNote.bind(this);
         this.updateNotePosition = this.updateNotePosition.bind(this);
         this.addEmptyPersonalNote = this.addEmptyPersonalNote.bind(this);
+        this.incrementVote = this.incrementVote.bind(this);
+        this.decrementVote = this.decrementVote.bind(this);
 
         this.state = {
-            votes: TOTAL_VOTES
+            votes: 0
         }
     }
 
@@ -36,6 +38,22 @@ class Clustering extends Component {
 
     addEmptyPersonalNote() {
         this.props.addNewPersonalNote('');
+    }
+
+    incrementVote() {
+        if (this.state.votes < TOTAL_VOTES) {
+            this.setState({ votes: this.state.votes + 1 });
+            return true;
+        }
+        return false;
+    }
+
+    decrementVote() {
+        if (this.state.votes > 0) {
+            this.setState({ votes: this.state.votes - 1 });
+            return true;
+        }
+        return false;
     }
 
     render() {
@@ -68,6 +86,8 @@ class Clustering extends Component {
                     deletePersonalNote={this.props.deletePersonalNote}
                     editPersonalNote={this.props.editPersonalNote}
                     updateNotePosition={this.updateNotePosition}
+                    incrementVote={this.incrementVote}
+                    decrementVote={this.decrementVote}
                 />
 
                 <Button

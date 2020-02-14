@@ -38,7 +38,9 @@ class Container extends Component {
             notes,
             deletePersonalNote,
             editPersonalNote,
-            updateNotePosition
+            updateNotePosition,
+            incrementVote,
+            decrementVote
         } = this.props;
 
         const pNotes = personalNotes.map((personalNote) => {
@@ -60,6 +62,8 @@ class Container extends Component {
                     phase={phase}
                     handleDrop={addNewNote}
                     updateNotePosition={updateNotePosition}
+                    incrementVote={incrementVote}
+                    decrementVote={decrementVote}
                 />
                 <div className="col s2">
                     {pNotes}

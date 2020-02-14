@@ -10,21 +10,29 @@ class NoteWithScore extends Component {
     incrementCount(e) {
         e.stopPropagation();
 
-        const { retroId, phase, fKey } = this.props;
+        const { retroId, phase, fKey, incrementVote } = this.props;
         this.props.changeZIndex(e, phase);
 
         if (e.ctrlKey) {
-            this.props.incrementNoteCount(retroId, fKey);
+            if (incrementVote()) {
+                this.props.incrementNoteCount(retroId, fKey);
+            } else {
+                window.Materialize.toast('No more remaining votes. Ctrl + Right Click to downvote a cluster', 2500);
+            }
         }
     }
 
     decrementCount(e) {
         e.preventDefault();
         e.stopPropagation();
-        const { retroId, fKey } = this.props;
+        const { retroId, fKey, decrementVote } = this.props;
 
         if (e.ctrlKey) {
-            this.props.decrementNoteCount(retroId, fKey);
+            if (decrementVote()) {
+                this.props.decrementNoteCount(retroId, fKey);   
+            } else {
+                window.Materialize.toast('No more remaining votes. Ctrl + Click to vote a cluster', 2500);
+            }
         }
     }
 
