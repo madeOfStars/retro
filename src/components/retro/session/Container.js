@@ -5,23 +5,48 @@ import Target from './Target';
 
 class Container extends Component {
 
-    render() {
+    showModal = () => {
         const {
+            noModal,
             phase,
             header,
             addNewPersonalNote,
+            addNewPersonalNoteWithColor
+        } = this.props;
+
+
+        if (!noModal) {
+            return (
+                <ModalNoteChooser
+                    phase={phase}
+                    header={header}
+                    addNewPersonalNote={addNewPersonalNote}
+                    addNewPersonalNoteWithColor={addNewPersonalNoteWithColor}
+                />
+            );
+        }
+    }
+
+    render() {
+        const {
+            noModal,
+            retroId,
+            phase,
+            noteType,
             addNewNote,
-            addNewPersonalNoteWithColor,
             personalNotes,
             notes,
             deletePersonalNote,
             editPersonalNote,
-            updateNotePosition
+            updateNotePosition,
+            incrementVote,
+            decrementVote
         } = this.props;
 
         const pNotes = personalNotes.map((personalNote) => {
             return <PersonalNote
                 key={personalNote.id} color={phase.color}
+                showEdit={!noModal}
                 personalNote={personalNote}
                 deletePersonalNote={deletePersonalNote}
                 editPersonalNote={editPersonalNote}
@@ -30,15 +55,19 @@ class Container extends Component {
 
         return (
             <div className="row">
-                <Target notes={notes} phase={phase} handleDrop={addNewNote} updateNotePosition={updateNotePosition} />
+                <Target
+                    notes={notes}
+                    noteType={noteType}
+                    retroId={retroId}
+                    phase={phase}
+                    handleDrop={addNewNote}
+                    updateNotePosition={updateNotePosition}
+                    incrementVote={incrementVote}
+                    decrementVote={decrementVote}
+                />
                 <div className="col s2">
                     {pNotes}
-                    <ModalNoteChooser
-                        phase={phase}
-                        header={header}
-                        addNewPersonalNote={addNewPersonalNote}
-                        addNewPersonalNoteWithColor={addNewPersonalNoteWithColor}
-                    />
+                    {this.showModal()}
                 </div>
             </div>
         );

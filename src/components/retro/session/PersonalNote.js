@@ -111,7 +111,7 @@ class PersonalNote extends Component {
     }
 
     renderDisplay() {
-        const { personalNote } = this.props;
+        const { personalNote, showEdit } = this.props;
         const { isDragging } = this.props;
         const opacity = isDragging ? 0 : 1;
 
@@ -121,9 +121,9 @@ class PersonalNote extends Component {
                     {this.renderText()}
                 </p>
                 <div className="right-align">
-                    <i className="material-icons" onClick={() => this.editModeOn()} style={{ marginRight: 10 }}>
+                    {showEdit ? <i className="material-icons" onClick={() => this.editModeOn()} style={{ marginRight: 10 }}>
                         edit
-                    </i>
+                    </i> : null}
                     <i className="material-icons" onClick={() => this.deletePersonalNote(personalNote)}>
                         delete
                     </i>

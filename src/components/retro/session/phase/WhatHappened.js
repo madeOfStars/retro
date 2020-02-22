@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Container from '../Container'
 import withPhaseHoc from '../../../commons/hoc/withPhaseHoc';
+import Note from '../Note';
 
 class WhatHappened extends Component {
 
@@ -42,6 +43,7 @@ class WhatHappened extends Component {
         return (
             <Container
                 phase={phase}
+                noteType={Note}
                 header={"Add new note"}
                 addNewPersonalNote={this.props.addNewPersonalNote}
                 personalNotes={this.props.personalNotes}

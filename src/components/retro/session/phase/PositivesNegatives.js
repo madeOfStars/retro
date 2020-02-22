@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Container from '../Container';
 import withPhaseHoc from '../../../commons/hoc/withPhaseHoc';
+import Note from '../Note';
 
 class PositivesNegatives extends Component {
     constructor(props) {
@@ -34,6 +35,7 @@ class PositivesNegatives extends Component {
         return (
             <Container
                 phase={phase}
+                noteType={Note}
                 header={"Add new note"}
                 addNewPersonalNoteWithColor={this.props.addNewPersonalNoteWithColor}
                 personalNotes={this.props.personalNotes}

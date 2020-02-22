@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class PhaseNavigation extends Component {
     render() {
         return (
-            <div className="col s12 row"  style={{marginBottom: '0px'}}>
+            <div className="col s12 row" style={{ marginBottom: '0px' }}>
                 <nav>
                     <div className={"nav-wrapper " + this.props.retrieveColor}>
                         <div className="col s12 row">
@@ -17,7 +17,6 @@ class PhaseNavigation extends Component {
                     </div>
                 </nav>
             </div>
-
         );
     }
 }

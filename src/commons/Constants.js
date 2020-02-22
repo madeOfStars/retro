@@ -37,6 +37,8 @@ export const NOTE_TYPE = {
     NOTE: 'NOTE'
 };
 
+export const TOTAL_VOTES = 3;
+
 export const COLOR = {}; //FIXME rename attribute color in firebase
 /**
  * in posistive and negative notes
