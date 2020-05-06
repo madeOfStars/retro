@@ -11,6 +11,10 @@ orderedPhases[RETRO_PHASE.POSITIVES_AND_NEGATIVES.identifier] = {
 }
 orderedPhases[RETRO_PHASE.CLUSTERING.identifier] = {
     previousPhase: RETRO_PHASE.POSITIVES_AND_NEGATIVES,
+    nextPhase: RETRO_PHASE.CONCLUSIONS
+}
+orderedPhases[RETRO_PHASE.CONCLUSIONS.identifier] = {
+    previousPhase: RETRO_PHASE.CLUSTERING,
     nextPhase: undefined
 }
 

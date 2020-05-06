@@ -9,18 +9,17 @@ class ModalNoteChooser extends Component {
     render() {
         const { phase, header, addNewPersonalNote, addNewPersonalNoteWithColor } = this.props;
 
-        if (phase.identifier === RETRO_PHASE.WHAT_HAPPENDED.identifier
-            || phase.identifier === RETRO_PHASE.CLUSTERING.identifier) {
+        if (phase.identifier === RETRO_PHASE.POSITIVES_AND_NEGATIVES.identifier) {
+            return <PNModalNewNote
+                phase={phase}
+                header={header}
+                addNewPersonalNoteWithColor={addNewPersonalNoteWithColor} />
+        } else {
             return <WHModalNewNote
                 phase={phase}
                 header={header}
                 addNewPersonalNote={addNewPersonalNote}
             />
-        } else {
-            return <PNModalNewNote
-                phase={phase}
-                header={header}
-                addNewPersonalNoteWithColor={addNewPersonalNoteWithColor} />
         }
     }
 }

@@ -20,6 +20,9 @@ class ManageTeams extends Component {
     }
 
     handleDeleteClick(e) {
+        // FIXME: bug when deleting a team
+        // users of that team(deleted) keep the ID of the deleted team
+        // should go to NO_TEAM
         e.preventDefault();
         this.props.deleteTeam(e.target.id);
     }

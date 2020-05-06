@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Clustering from './phase/Clustering';
-import PositivesNegatives from './phase/PositivesNegatives';
 import WhatHappened from './phase/WhatHappened';
+import PositivesNegatives from './phase/PositivesNegatives';
+import Clustering from './phase/Clustering';
+import Conclusions from './phase/Conclusions';
 import Error from './phase/Error';
 
 import { RETRO_PHASE } from '../../../commons/Constants';
@@ -18,6 +19,8 @@ class PhaseChooser extends Component {
             return <PositivesNegatives phase={phase} retroId={retroId} />
         } else if (phase.identifier === RETRO_PHASE.CLUSTERING.identifier) {
             return <Clustering phase={phase} retroId={retroId} />
+        } else if (phase.identifier === RETRO_PHASE.CONCLUSIONS.identifier) {
+            return <Conclusions phase={phase} retroId={retroId} />
         } else {
             return <Error />
         }

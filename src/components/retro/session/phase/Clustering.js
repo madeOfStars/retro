@@ -79,7 +79,6 @@ class Clustering extends Component {
                     retroId={retroId}
                     phase={phase}
                     noteType={NoteWithScore}
-                    header={"Add new note"}
                     personalNotes={this.props.personalNotes}
                     addNewNote={this.addNewClusteringNote}
                     notes={finalNotes}

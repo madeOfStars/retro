@@ -37,7 +37,9 @@ class Note extends Component {
                 style={this.props.generateStyle(note.positionStyle, opacity)}
                 onClick={(e) => this.props.changeZIndex(e, phase)}
             >
-                <p id="text">{note.text}</p>
+                <p id="text">
+                    {phase.identifier !== 'CONCLUSIONS' ? note.text : note.count}
+                </p>
             </div>
         );
     }

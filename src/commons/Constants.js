@@ -27,10 +27,15 @@ export const RETRO_PHASE = {
         identifier: 'CLUSTERING',
         label: "Clustering",
         color: "orange darken-2"
+    },
+    CONCLUSIONS: {
+        identifier: 'CONCLUSIONS',
+        label: 'Conclusions',
+        color: "orange darken-4"
     }
 };
 
-export const MAX_CHARS_PER_NOTE = 50;
+export const MAX_CHARS_PER_NOTE = 70;
 
 export const NOTE_TYPE = {
     PERSONAL_NOTE: 'PERSONAL_NOTE',

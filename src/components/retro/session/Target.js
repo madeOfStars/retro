@@ -62,6 +62,7 @@ class Target extends Component {
                 }
 
             case 'CLUSTERING':
+            case 'CONCLUSIONS':
                 return {
                     previousNotes: { notes: notes['POSITIVES_AND_NEGATIVES'], opacity: 0.7 },
                     currentNotes: { notes: notes['CLUSTERING'], opacity: 1 }

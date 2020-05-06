@@ -6,13 +6,15 @@ import authReducer from './auth/authReducer';
 import teamReducer from './team/teamReducer';
 import retroReducer from './retro/retroReducer';
 import noteReducer from './retro/note/noteReducer';
+import conclusionReducer from './conclusion/conclusionReducer';
 
 const rootReducer = combineReducers({
     auth: authReducer,
     firebase: firebaseReducer,
     team: teamReducer,
     retro: retroReducer,
-    note: noteReducer
+    note: noteReducer,
+    conclusion: conclusionReducer
 });
 
 export default rootReducer;

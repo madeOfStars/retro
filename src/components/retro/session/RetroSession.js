@@ -24,6 +24,10 @@ class RetroSession extends Component {
             {
                 phase: RETRO_PHASE.CLUSTERING,
                 component: <a key="2" className="breadcrumb" onClick={(e) => this.changeToPhase(e, 3)} href="">Clustering</a>
+            },
+            {
+                phase: RETRO_PHASE.CONCLUSIONS,
+                component: <a key="3" className="breadcrumb" onClick={(e) => this.changeToPhase(e, 4)} href="">Conclusions</a>
             }
         ];
 
@@ -60,7 +64,9 @@ class RetroSession extends Component {
 
     changeToPhase(e, phase) {
         e.preventDefault();
-        this.setState({ currentPhase: phase });
+        if (this.state.currentPhase !== 4) {
+            this.setState({ currentPhase: phase });
+        }
     }
 
     getNextPhaseButton() {
@@ -74,13 +80,12 @@ class RetroSession extends Component {
 
     goToNextPhase() {
         const { phases, currentPhase } = this.state;
-        const retroId = this.props.match.params.id;
 
         if (currentPhase !== phases.length)
             this.setState({ currentPhase: this.state.currentPhase + 1 });
         else {
-            this.props.closeRetroSession(retroId);
-            this.props.history.push('/');
+            // this.props.closeRetroSession(retroId);
+            // this.props.history.push('/');
         }
     }
 
