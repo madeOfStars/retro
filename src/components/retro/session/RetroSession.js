@@ -80,12 +80,13 @@ class RetroSession extends Component {
 
     goToNextPhase() {
         const { phases, currentPhase } = this.state;
+        const retroId = this.props.match.params.id;
 
         if (currentPhase !== phases.length)
             this.setState({ currentPhase: this.state.currentPhase + 1 });
         else {
-            // this.props.closeRetroSession(retroId);
-            // this.props.history.push('/');
+            this.props.closeRetroSession(retroId);
+            this.props.history.push('/');
         }
     }
 
