@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Col, Button } from 'react-materialize';
+import { withRouter } from 'react-router-dom';
 
 import DialogDeleteRetro from '../retro/DialogDeleteRetro';
 import { deleteRetro } from '../../store/actions/retro/retroActions';
@@ -16,7 +17,7 @@ class PastRetros extends Component {
     }
 
     showRetro(e) {
-        console.log(e.target.id);
+        this.props.history.push(`/conclusions/${e.target.id}`);
     }
 
     deleteRetro(retro) {
@@ -60,4 +61,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(PastRetros);
+export default withRouter(connect(null, mapDispatchToProps)(PastRetros));
