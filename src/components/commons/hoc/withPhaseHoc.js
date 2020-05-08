@@ -49,7 +49,7 @@ const withPhaseHoc = WrappedComponent => {
 
         getNotesPerPhase(phaseIdentifier, notesByRetroId) {
             let tmpFinalNotes = [];
-            const notesByPhase = notesByRetroId[phaseIdentifier];
+            const notesByPhase = notesByRetroId === undefined ? {} : notesByRetroId[phaseIdentifier];
     
             if (notesByPhase !== undefined && notesByPhase !== null) {
                 tmpFinalNotes = Object.entries(notesByPhase).map(entry => {

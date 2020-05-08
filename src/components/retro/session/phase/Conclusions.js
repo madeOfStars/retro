@@ -21,7 +21,7 @@ class Conclusions extends Component {
 
     getNotesPerPhase(phaseIdentifier, notesByRetroId) {
         let tmpFinalNotes = [];
-        const notesByPhase = notesByRetroId[phaseIdentifier];
+        const notesByPhase = notesByRetroId === undefined ? {} : notesByRetroId[phaseIdentifier];
 
         if (notesByPhase !== undefined && notesByPhase !== null) {
             tmpFinalNotes = Object.entries(notesByPhase).map(entry => {
@@ -48,23 +48,29 @@ class Conclusions extends Component {
         this.props.editConclusionItem(conclusionItem);
     }
 
-    getConclusionsAsArray(conclusions) {
+    getConclusionsAsArray(conclusions, retroId) {
         if (conclusions === undefined || conclusions === null) {
             return [];
         }
         
-        return Object.entries(conclusions).map(entry => {
+        const allConclusions = Object.entries(conclusions).map(entry => {
             return {
                 id: entry[0],
-                text: entry[1].conclusionItem
+                text: entry[1].conclusionItem,
+                retroId: entry[1].retroId
             }
+        });
+        console.log(allConclusions);
+
+        return allConclusions.filter(conclusion => {
+            return conclusion.retroId === retroId;
         });
     }
 
     render() {
 
         const { phase, notes, retroId, conclusions } = this.props;
-        const conclusionList = this.getConclusionsAsArray(conclusions);
+        const conclusionList = this.getConclusionsAsArray(conclusions, retroId);
 
         let finalNotes = [];
 

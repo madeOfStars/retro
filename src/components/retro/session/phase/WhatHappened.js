@@ -27,8 +27,8 @@ class WhatHappened extends Component {
 
         if (notes !== undefined && notes !== null) {
             let tmpFinalNotes = [];
-            const notesByRetroId = notes[retroId];
-            const notesByPhase = notesByRetroId['WHAT_HAPPENDED']; //FIXME in case there si no note al all
+            const notesByRetroId = notes === undefined ? [] : notes[retroId];
+            const notesByPhase = notesByRetroId === undefined ? {} : notesByRetroId['WHAT_HAPPENDED'];
 
             tmpFinalNotes = Object.entries(notesByPhase).map(entry => {
                 return {

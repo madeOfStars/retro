@@ -55,11 +55,11 @@ export const updateNotePosition = (retroId, noteId, positionStyle) => {
     }
 }
 
-export const closeRetroSession = (retroId) => {
+export const updateRetroSession = (retroId, retroStatus) => {
     return (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();
 
-        firebase.update(`retros/${retroId}`, { status: RETRO_STATUS.CLOSED.status })
+        firebase.update(`retros/${retroId}`, { status: retroStatus.status })
             .then(() => {
                 dispatch({ type: actionTypes.CLOSE_RETRO_SESSION.SUCCESS });
             })

@@ -38,6 +38,9 @@ class ActiveRetros extends Component {
     }
 
     goToRetroSession(retro) {
+        if (retro.value.status === RETRO_STATUS.OPEN.status) {
+            this.props.updateRetroSession(retro.key, RETRO_STATUS.ONGOING);
+        }
         this.props.history.push(`/retro/${retro.key}`);
     }
 

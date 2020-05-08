@@ -6,7 +6,7 @@ import ModalCreateSprint from '../retro/ModalCreateRetroSession';
 import ActiveRetros from './ActiveRetros';
 import PastRetros from './PastRetros';
 import { RETRO_STATUS } from '../../commons/Constants';
-import { createNewRetroSession } from '../../store/actions/retro/retroActions';
+import { createNewRetroSession, updateRetroSession } from '../../store/actions/retro/retroActions';
 import withAuth from '../commons/hoc/withAuth';
 
 class Dashboard extends Component {
@@ -29,7 +29,7 @@ class Dashboard extends Component {
 
         return (
             <div>
-                <ActiveRetros activeRetros={openRetros} type={RETRO_STATUS.OPEN.label} />
+                <ActiveRetros activeRetros={openRetros} type={RETRO_STATUS.OPEN.label} updateRetroSession={this.props.updateRetroSession} />
                 <ActiveRetros activeRetros={ongoingRetros} type={RETRO_STATUS.ONGOING.label} />
                 <PastRetros pastRetros={this.fetchRetrosByStatusAndUserTeam(retros, RETRO_STATUS.CLOSED.status, loggedUser)} type={RETRO_STATUS.CLOSED.label} />
                 <ModalCreateSprint createNewRetroSession={this.props.createNewRetroSession} loggedUser={loggedUser} allowCreationOfNewSession={allowCreationOfNewSession} />
@@ -56,7 +56,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createNewRetroSession: (retroSession) => dispatch(createNewRetroSession(retroSession))
+        createNewRetroSession: (retroSession) => dispatch(createNewRetroSession(retroSession)),
+        updateRetroSession: (retroId, retroStatus) => dispatch(updateRetroSession(retroId, retroStatus))
     }
 }
 

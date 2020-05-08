@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Button } from 'react-materialize';
-import { RETRO_PHASE } from '../../../commons/Constants';
+import { RETRO_PHASE, RETRO_STATUS } from '../../../commons/Constants';
 import PhaseNavigation from './PhaseNavigation';
 import PhaseChooser from './PhaseChooser';
 import withAuth from '../../commons/hoc/withAuth';
-import { closeRetroSession } from '../../../store/actions/retro/retroActions';
+import { updateRetroSession } from '../../../store/actions/retro/retroActions';
 
 class RetroSession extends Component {
 
@@ -85,7 +85,7 @@ class RetroSession extends Component {
         if (currentPhase !== phases.length)
             this.setState({ currentPhase: this.state.currentPhase + 1 });
         else {
-            this.props.closeRetroSession(retroId);
+            this.props.updateRetroSession(retroId);
             this.props.history.push('/');
         }
     }
@@ -109,7 +109,7 @@ class RetroSession extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        closeRetroSession: (retroId) => dispatch(closeRetroSession(retroId))
+        updateRetroSession: (retroId) => dispatch(updateRetroSession(retroId, RETRO_STATUS.CLOSED))
     }
 }
 
