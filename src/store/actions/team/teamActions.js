@@ -18,9 +18,30 @@ export const deleteTeam = (key) => {
     return (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();
 
-        firebase.remove('teams/' + key)
-            .then(() => {
-                dispatch({ type: actionTypes.REMOVE_TEAM.SUCCESS });
+        let usersToBeDeleted = null;
+
+        firebase.ref(`teams/${key}`)
+            .once('value')
+            .then(team => {
+                usersToBeDeleted = team.val().users || [];
+                usersToBeDeleted.forEach(user => {
+                    firebase.update(`users/${user.key}`, { team: NO_TEAM });
+                });
+
+                firebase.ref(`teams/${NO_TEAM}`)
+                    .once('value')
+                    .then(team => {
+                        let users = team.val().users || [];
+                        usersToBeDeleted.forEach(user => {
+                            users.push(user);
+                        });
+                        firebase.ref(`teams/${NO_TEAM}/users`).set(usersToBeDeleted);
+                    });
+
+                firebase.remove('teams/' + key)
+                    .then(() => {
+                        dispatch({ type: actionTypes.REMOVE_TEAM.SUCCESS });
+                    })
             }).catch((err) => {
                 dispatch({ type: actionTypes.REMOVE_TEAM.ERROR, err });
             });
@@ -30,7 +51,7 @@ export const deleteTeam = (key) => {
 export const addUserToTeam = (user, teamKey, teamToLoseUser) => {
     return (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();
-        firebase.ref(`teams/${teamKey}`) //FIXME: nuk ka nevoje qe te lexohet nga DB por thjesht te kalohet currentTeam
+        firebase.ref(`teams/${teamKey}`)
             .once('value')
             .then(team => {
                 let users = team.val().users || [];

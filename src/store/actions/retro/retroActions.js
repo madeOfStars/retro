@@ -1,5 +1,5 @@
 import actionTypes from '../../types';
-import { RETRO_PHASE, RETRO_STATUS } from '../../../commons/Constants';
+import { RETRO_PHASE } from '../../../commons/Constants';
 
 
 export const createNewRetroSession = (retroSession) => {
