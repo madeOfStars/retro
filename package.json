@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "firebase": "^5.11.1",
+    "firebase": "^10.9.0",
     "moment": "^2.25.3",
     "react": "^16.13.1",
     "react-dnd": "^9.5.1",
